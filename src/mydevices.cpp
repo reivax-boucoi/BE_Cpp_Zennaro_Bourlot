@@ -30,7 +30,7 @@ void AnalogSensorLuminosity::run() {
 	while (1) {
 		alea = 1 - alea;
 		if (ptrmem != NULL)
-			*ptrmem = val + alea;
+			*ptrmem = luminosite_environment + alea;
 		sleep(temps);
 	}
 }
@@ -52,6 +52,30 @@ void DigitalActuatorLED::run(){
     sleep(temps);
     }
 }
+
+
+//classe IntelligentDigitalActuatorLED
+IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t, int inc) : Device(), state(LOW), pState(LOW), temps(t){
+    increment=inc;
+}
+
+void IntelligentDigitalActuatorLED::run(){
+  while(1){
+        if(ptrmem!=NULL)state=*ptrmem;
+        if(state!=pState){
+            pState=state;
+            if(state)luminosite_environment+=increment;
+                else luminosite_environment-=increment;
+        }
+        if (state==LOW){
+            cout << "((((IDALeteint"<<luminosite_environment<<"))))\n";
+        }else{
+            cout << "((((IDALallume"<<luminosite_environment<<"))))\n";
+        }
+        sleep(temps);
+    }
+}
+
 
 // classe I2CActuatorScreen
 I2CActuatorScreen::I2CActuatorScreen ():Device(){
