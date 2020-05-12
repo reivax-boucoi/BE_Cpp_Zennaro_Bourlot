@@ -7,9 +7,7 @@
 #include <string.h>
 #include "core_simulation.h"
 
-
-//int luminosite_environment = 200; //lux.
-
+extern int luminosite_environment;
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
 class AnalogSensorTemperature: public Device {
