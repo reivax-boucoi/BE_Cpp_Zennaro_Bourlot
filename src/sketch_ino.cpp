@@ -8,8 +8,10 @@ void Board::setup(){
 // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
   pinMode(1,INPUT); //temp sensor
   pinMode(2, INPUT);    //lum sensor
+  pinMode(4, INPUT);    //btn
   pinMode(0,OUTPUT);    //basic led
   pinMode(3,OUTPUT);    //intelligent led
+  
 }
 
 // la boucle de controle arduino
@@ -32,14 +34,14 @@ void Board::loop(){
         }
         cpt++;
         sleep(1);
+        
+        digitalWrite(3,digitalRead(4)); //btn ctrl smartled
     }
     // on eteint et on allume la LED
     if(bascule){
         digitalWrite(0,HIGH);
-        digitalWrite(3,HIGH);
     }else{
         digitalWrite(0,LOW);
-        digitalWrite(3,LOW);
     }
     bascule=1-bascule;
 

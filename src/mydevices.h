@@ -5,6 +5,7 @@
 #include <thread>
 #include <unistd.h>
 #include <string.h>
+#include <fstream>
 #include "core_simulation.h"
 
 extern int luminosite_environment;
@@ -58,6 +59,8 @@ public:
 };
 
 
+
+
 class IntelligentDigitalActuatorLED : public Device{
     private:
         int increment, state, temps, pState;
@@ -66,6 +69,15 @@ public:
   IntelligentDigitalActuatorLED(int t, int inc);
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
+};
+
+
+class ExternalDigitalSensorButton : public Device{
+private :
+    int state, temps;
+public :
+    ExternalDigitalSensorButton(int t);
+    virtual void run();
 };
 
 // exemple d'actionneur sur le bus I2C permettant d'echanger des tableaux de caracteres : un ecran, ne pas oublier d'heriter de Device

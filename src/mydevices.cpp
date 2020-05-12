@@ -55,7 +55,7 @@ void DigitalActuatorLED::run(){
 
 
 //classe IntelligentDigitalActuatorLED
-IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t, int inc) : Device(), state(LOW), pState(LOW), temps(t){
+IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t, int inc) : Device(), state(LOW), temps(t), pState(LOW){
     increment=inc;
 }
 
@@ -76,6 +76,23 @@ void IntelligentDigitalActuatorLED::run(){
     }
 }
 
+//class ExternalDigitalSensorButton
+
+ExternalDigitalSensorButton::ExternalDigitalSensorButton(int t) : Device(), state(LOW){
+    
+}
+
+void ExternalDigitalSensorButton::run(){
+    while(1){
+        if(ifstream("btnON.txt")){
+            state=HIGH;
+        }else{
+            state=LOW;
+        }
+        *ptrmem=state;
+        sleep(1);
+    }
+}
 
 // classe I2CActuatorScreen
 I2CActuatorScreen::I2CActuatorScreen ():Device(){
