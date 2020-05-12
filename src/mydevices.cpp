@@ -17,6 +17,24 @@ void AnalogSensorTemperature::run(){
   }
 }
 
+
+//classe AnalogSensorLuminosity
+AnalogSensorLuminosity::AnalogSensorLuminosity(int tps, int data) : Device(), val(data), temps(tps) {
+	alea = 1;
+}
+
+
+void AnalogSensorLuminosity::run() {
+	while (1) {
+		alea = 1 - alea;
+		if (ptrmem != NULL)
+			*ptrmem = val + alea;
+		sleep(temps);
+	}
+}
+
+
+
 //classe DigitalActuatorLED
 DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
 }
