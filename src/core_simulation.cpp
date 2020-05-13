@@ -174,3 +174,53 @@ void Board::i2c(int addr,Device& dev){
   tabthreadbus[addr]=new thread(&Device::run,&dev);
 }
 
+LCD::LCD(int c, int r){
+    col=c;
+    row=r;
+    setCursor(0,0);
+    cursorBlinking=false;
+}
+
+LCD::LCD(void){
+    col=16;
+    row=2;
+    setCursor(0,0);
+    cursorBlinking=false;
+}
+void LCD::display(void){
+    for(int r=0;r<row;r++){
+        for(int c=0;c<col;c++){
+            
+        }   
+    }
+}
+
+//vide l'ecran
+void LCD::clear(void){
+    data="";
+    display();
+}
+
+//positonne le curseur
+void LCD::setCursor(int x, int y){
+    cursorX=x;
+    cursorY=y;
+}
+ 
+
+//affiche la chaine de caracteres sur l'ecran a partie de la position du curseur
+void LCD::print(string str){
+    
+    for ( string::iterator it=str.begin(); it!=str.end(); ++it){
+        if(cursorX<col && cursorY<row){
+            data[cursorX+col*cursorY]=*it;
+            cursorX++;
+        }
+    }
+    display();
+}
+
+//active ou desactive la visiblilite du curseur
+void LCD::blink(bool state){
+    cursorBlinking=state;
+}

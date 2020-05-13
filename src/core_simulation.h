@@ -41,6 +41,36 @@ class Terminal {
     void println(string s);
 };
 
+class LCD{
+private :
+    //determine les dimensions de l'ecran LCD, typiquement 16x2 ou 16x4
+    int col, row;
+    //les donnees affichees
+    string data;
+    //la position du curseur
+    int cursorX, cursorY;
+    //le curseur est il visible(clignotant) ou invisible)
+    bool cursorBlinking;
+    //affiche l'ecran
+    void display(void);
+    
+public :
+    LCD(int c, int r);
+    LCD(void);
+    //vide l'ecran
+    void clear(void);
+    //positonne le curseur
+    void setCursor(int x, int y);
+    //affiche la chaine de caracteres sur l'ecran a partie de la position du curseur
+    void print(string str);
+    //active ou desactive la visiblilite du curseur
+    void blink(bool state);
+    //recupere la position du curseur
+    int getCursorX(void){return cursorX;};
+    int getCursorY(void){return cursorY;};
+    
+};
+
 // representatoin du bus I2C
 class I2C{
 protected:
