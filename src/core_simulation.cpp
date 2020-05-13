@@ -179,6 +179,7 @@ LCD::LCD(int c, int r){
     row=r;
     setCursor(0,0);
     cursorBlinking=false;
+    data.resize (col*row,' ');
 }
 
 LCD::LCD(void){
@@ -186,18 +187,33 @@ LCD::LCD(void){
     row=2;
     setCursor(0,0);
     cursorBlinking=false;
+    data.resize (col*row,' ');
 }
 void LCD::display(void){
+    cout <<"\r\n┌";
+    for(int c=0;c<col;c++)cout << "─";
+    cout <<"┐"<<endl;
+    
     for(int r=0;r<row;r++){
+        cout <<"│";
         for(int c=0;c<col;c++){
-            
+            if(r==cursorY && c==cursorX){
+                 cout << "\033[5;41m"<<data[r*col+c]<<"\033[0m";
+            }else{
+                cout << data[r*col+c];
+            }
         }   
+        cout <<"│"<<endl;
     }
+    cout <<"└";
+    for(int c=0;c<col;c++)cout << "─";
+    cout <<"┘"<<endl;
 }
 
 //vide l'ecran
 void LCD::clear(void){
-    data="";
+    data.clear();
+    data.resize(col*row,' ');
     display();
 }
 

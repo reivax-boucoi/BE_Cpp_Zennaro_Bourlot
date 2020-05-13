@@ -21,7 +21,7 @@ void Board::loop(){
     static int cpt=0;
     static int bascule=0;
     int i=0;
-    for(i=0;i<10;i++){
+   /* for(i=0;i<10;i++){
         // lecture sur la pin 1 : capteur de temperature
         temp=analogRead(1);
         lum=analogRead(2);
@@ -43,8 +43,14 @@ void Board::loop(){
     }else{
         digitalWrite(0,LOW);
     }
-    bascule=1-bascule;
-
+    bascule=1-bascule;*/
+    myLcd.print("Hello");
+    sleep(1);
+    myLcd.print(" World !  1");
+    sleep(1);
+    myLcd.setCursor(0,1);
+    myLcd.print("Coucou !");
+    while(1);
 }
 
 
