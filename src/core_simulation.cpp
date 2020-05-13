@@ -177,7 +177,8 @@ void Board::i2c(int addr,Device& dev){
 LCD::LCD(int c, int r){
     col=c;
     row=r;
-    setCursor(0,0);
+    cursorX=0;
+    cursorY=0;
     cursorBlinking=false;
     data.resize (col*row,' ');
 }
@@ -185,7 +186,8 @@ LCD::LCD(int c, int r){
 LCD::LCD(void){
     col=16;
     row=2;
-    setCursor(0,0);
+    cursorX=0;
+    cursorY=0;
     cursorBlinking=false;
     data.resize (col*row,' ');
 }
