@@ -5,9 +5,26 @@ using namespace std;
 
 int luminosite_environment = 200; //lux.
 
+//classe Sensor
+Sensor::Sensor() : Device() {
+    SensorMode = PASSIVE;
+}
+
+//classe AnalogSensor
+AnalogSensor::AnalogSensor(int time, int value) : Sensor(),val(value), temps(time) {
+    alea=1;
+}
+
+int AnalogSensor::getValue(){
+    return value;
+}
+
 //classe AnalogSensorTemperature
-AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d){
-  alea=1;
+AnalogSensorTemperature::AnalogSensorTemperature():AnalogSensor(time,value){
+}
+
+const char* AnalogSensorTemperature::getSensorName(){
+    return "TemperatureSensor";
 }
 
 void AnalogSensorTemperature::run(){

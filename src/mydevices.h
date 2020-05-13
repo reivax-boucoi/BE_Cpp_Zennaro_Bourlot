@@ -10,37 +10,122 @@
 
 extern int luminosite_environment;
 
-// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
-class AnalogSensorTemperature: public Device {
-private:
-  // fait osciller la valeur du cpateur de 1
+//////////////////////////////////////////// SENSORS ////////////////////////////////////////////////////
+//classe generique pour tout type de capteur
+class Sensor : public Device {
+ protected:
+    int sensorMode;
+ public:
+    virtual const char* getSensorName() = 0;
+
+    Sensor();
+};
+
+//definition de la classe generique pour tous les capteurs analogiques
+class AnalogSensor : public Sensor {
+ protected:
+  // fait osciller la valeur du capteur de 1
   int alea;
-  // valeur de temperature mesuree
+  // valeur du capteur mesure
   int val;
   // temps entre 2 prises de valeurs
-  int temps;
-  
+  int temps;  
+    
+public:
+    
+    AnalogSensor(int time, int value);
+    
+    int getValue();
+};
+
+//definition de la classe generique pour tous les capteurs ON/OFF
+class DigitalSensor : public Sensor {
+ protected:
+    //etat ON ou OFF du bouton
+    int state;
+    // temps entre 2 prises de valeurs
+    int temps;  
+ public:
+    
+    DigitalSensor(int time);
+
+    int getState();
+};
+
+// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
+class AnalogSensorTemperature: public AnalogSensor {
+private:
+ 
 public:
   //constructeur ne pas oublier d'initialiser la classe mere
-  AnalogSensorTemperature(int d,int  t);
+  AnalogSensorTemperature(int time, int value);
+    //Type du capteur
+   virtual const char* getSensorName();
   // thread representant le capteur et permettant de fonctionner independamment de la board
   virtual void run();
 };
 
 // Classe du capteur de luminosité
-class AnalogSensorLuminosity : public Device {
+class AnalogSensorLuminosity : public AnalogSensor {
 private:
-	// fait osciller la valeur du cpateur de 1
-	int alea;
-	// valeur de luminosité mesuree
-	int val;
-	// temps entre 2 prises de valeurs
-	int temps;
+
 public:
 	//constructeur
-	AnalogSensorLuminosity(int tps, int data);
+	AnalogSensorLuminosity(int time, int value);
+    //Type du capteur
+    virtual const char* getSensorName();
 	// thread representant le capteur et permettant de fonctionner independamment de la board
 	virtual void run();
+};
+
+// Classe du capteur de pression
+class AnalogSensorPressure : public AnalogSensor {
+private:
+
+public:
+	//constructeur
+	AnalogSensorPressure(int time, int value);
+    //Type du capteur
+    virtual const char* getSensorName();
+	// thread representant le capteur et permettant de fonctionner independamment de la board
+	virtual void run();
+};
+
+class ExternalDigitalSensorButton : public DigitalSensor{
+private :
+    
+public :
+    ExternalDigitalSensorButton(int time);
+    //Type du capteur
+    virtual const char* getSensorName();
+    // thread representant le bouton et permettant de fonctionner independamment de la board
+    virtual void run();
+};
+
+//////////////////////////////////////////// ACTUATORS ////////////////////////////////////////////////////
+
+//classe generique pour tout type de capteur
+class Actuator : public Device {
+ protected:
+    int actuatorMode;
+ public:
+    virtual const char* getActuatorName() = 0;
+
+    Actuator();
+};
+
+class AnalogActuator : public Actuator {
+ protected:
+  // valeur du capteur mesure
+  int val;
+  // temps entre 2 prises de valeurs
+  int temps;  
+    
+public:
+    
+    AnalogActuator(int time, int value);
+    
+    void setValue(int data);
 };
 
 // exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
@@ -71,14 +156,6 @@ public:
   virtual void run();
 };
 
-
-class ExternalDigitalSensorButton : public Device{
-private :
-    int state, temps;
-public :
-    ExternalDigitalSensorButton(int t);
-    virtual void run();
-};
 
 // exemple d'actionneur sur le bus I2C permettant d'echanger des tableaux de caracteres : un ecran, ne pas oublier d'heriter de Device
 class I2CActuatorScreen : public Device{

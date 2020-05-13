@@ -5,9 +5,30 @@ using namespace std;
 
 int luminosite_environment = 200; //lux.
 
+//////////////////////////////////////////// SENSORS ////////////////////////////////////////////////////
+//classe Sensor
+Sensor::Sensor() : Device() {
+    sensorMode = PASSIVE;
+}
+
+//classe AnalogSensor
+AnalogSensor::AnalogSensor(int time, int value) : Sensor(),val(value), temps(time) {
+    alea=1;
+}
+
+int AnalogSensor::getValue(){
+    return val;
+}
+
+//classe OnOffSensor
+
+
 //classe AnalogSensorTemperature
-AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d){
-  alea=1;
+AnalogSensorTemperature::AnalogSensorTemperature(int time,int value):AnalogSensor(time,value){
+}
+
+const char* AnalogSensorTemperature::getSensorName(){
+    return "TemperatureSensor";
 }
 
 void AnalogSensorTemperature::run(){
@@ -21,22 +42,84 @@ void AnalogSensorTemperature::run(){
 
 
 //classe AnalogSensorLuminosity
-AnalogSensorLuminosity::AnalogSensorLuminosity(int tps, int data) : Device(), val(data), temps(tps) {
-	alea = 1;
+AnalogSensorLuminosity::AnalogSensorLuminosity(int time,int value):AnalogSensor(time,value){
 }
 
+const char* AnalogSensorLuminosity::getSensorName(){
+    return "LuminositySensor";
+}
 
 void AnalogSensorLuminosity::run() {
 	while (1) {
 		alea = 1 - alea;
 		if (ptrmem != NULL)
-			*ptrmem = luminosite_environment + alea;
+			*ptrmem = val + alea;
 		sleep(temps);
 	}
 }
 
+//classe AnalogSensorLuminosity
+AnalogSensorPressure::AnalogSensorPressure(int time,int value):AnalogSensor(time,value){
+}
+
+const char* AnalogSensorPressure::getSensorName(){
+    return "PressureSensor";
+}
+
+void AnalogSensorPressure::run() {
+	while (1) {
+		alea = 1 - alea;
+		if (ptrmem != NULL)
+			*ptrmem = val + alea;
+		sleep(temps);
+	}
+}
+
+//class DigitalSensor
+DigitalSensor::DigitalSensor(int time) : Sensor(), temps(time) {
+    state = OFF;
+}
+
+int DigitalSensor::getState(){
+    return state;
+}
+
+//classe ExternalDigitalSensorButton
+ExternalDigitalSensorButton::ExternalDigitalSensorButton(int time):DigitalSensor(time){
+}
+
+const char* ExternalDigitalSensorButton::getSensorName(){
+    return "Button";
+}
 
 
+void ExternalDigitalSensorButton::run(){
+    while(1){
+        if(ifstream("btnON.txt")){
+            state=ON;
+        }else{
+            state=OFF;
+        }
+        *ptrmem=state;
+        sleep(temps);
+    }
+}
+
+
+//////////////////////////////////////////// ACTUATORS ////////////////////////////////////////////////////
+
+//classe Actuator
+Actuator::Actuator() : Device() {
+    actuatorMode = PASSIVE;
+}
+
+//classe AnalogSensor
+AnalogActuator::AnalogActuator(int time, int value) : Actuator(),val(value), temps(time) {
+}
+
+void AnalogActuator::setValue(int data){
+    val = data;
+}
 //classe DigitalActuatorLED
 DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
 }
@@ -76,23 +159,6 @@ void IntelligentDigitalActuatorLED::run(){
     }
 }
 
-//class ExternalDigitalSensorButton
-
-ExternalDigitalSensorButton::ExternalDigitalSensorButton(int t) : Device(), state(LOW){
-    
-}
-
-void ExternalDigitalSensorButton::run(){
-    while(1){
-        if(ifstream("btnON.txt")){
-            state=HIGH;
-        }else{
-            state=LOW;
-        }
-        *ptrmem=state;
-        sleep(1);
-    }
-}
 
 // classe I2CActuatorScreen
 I2CActuatorScreen::I2CActuatorScreen ():Device(){
@@ -107,7 +173,6 @@ void I2CActuatorScreen::run(){
     sleep(1);
     }
 }
-
 
 
 
