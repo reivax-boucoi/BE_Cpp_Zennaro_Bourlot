@@ -49,7 +49,11 @@ void Board::loop(){
     myLcd.print(" World !  1");
     sleep(1);
     myLcd.setCursor(0,1);
-    myLcd.print("Coucou !");
+    myLcd.print(">Coucou !");
+    sleep(1);
+    myLcd.setCursor(0,1);
+    sleep(1);
+    myLcd.blink(true);
     while(1);
 }
 

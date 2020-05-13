@@ -198,7 +198,7 @@ void LCD::display(void){
         cout <<"│";
         for(int c=0;c<col;c++){
             if(r==cursorY && c==cursorX){
-                 cout << "\033[5;41m"<<data[r*col+c]<<"\033[0m";
+                 cout << "\033["<<(cursorBlinking? '5' : '1')<<";41m"<<data[r*col+c]<<"\033[0m";    //ANSI escape code magic
             }else{
                 cout << data[r*col+c];
             }
@@ -221,6 +221,7 @@ void LCD::clear(void){
 void LCD::setCursor(int x, int y){
     cursorX=x;
     cursorY=y;
+    display();
 }
  
 
@@ -239,4 +240,5 @@ void LCD::print(string str){
 //active ou desactive la visiblilite du curseur
 void LCD::blink(bool state){
     cursorBlinking=state;
+    display();
 }
