@@ -20,8 +20,6 @@ int AnalogSensor::getValue(){
     return val;
 }
 
-//classe OnOffSensor
-
 
 //classe AnalogSensorTemperature
 AnalogSensorTemperature::AnalogSensorTemperature(int time,int value):AnalogSensor(time,value){
@@ -113,22 +111,37 @@ Actuator::Actuator() : Device() {
     actuatorMode = PASSIVE;
 }
 
-//classe AnalogSensor
+//classe AnalogActuator
 AnalogActuator::AnalogActuator(int time, int value) : Actuator(),val(value), temps(time) {
 }
 
 void AnalogActuator::setValue(int data){
     val = data;
 }
+
+//classe DigitalActuator
+DigitalActuator::DigitalActuator(int time) : Actuator(), temps(time) {
+    state = OFF;
+}
+
+void DigitalActuator::setState(int newstate){
+     state = newstate;
+}
+
+
 //classe DigitalActuatorLED
-DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
+DigitalActuatorLED::DigitalActuatorLED(int time):DigitalActuator(time){
+}
+
+const char* DigitalActuatorLED::getActuatorName(){
+    return "LED";
 }
 
 void DigitalActuatorLED::run(){
   while(1){
     if(ptrmem!=NULL)
       state=*ptrmem;
-    if (state==LOW)
+    if (state==OFF)
       cout << "((((eteint))))\n";
     else
     cout << "((((allume))))\n";
@@ -138,8 +151,12 @@ void DigitalActuatorLED::run(){
 
 
 //classe IntelligentDigitalActuatorLED
-IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t, int inc) : Device(), state(LOW), temps(t), pState(LOW){
+IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int time, int inc) : DigitalActuator(time), pState(OFF){
     increment=inc;
+}
+
+const char* IntelligentDigitalActuatorLED::getActuatorName(){
+    return "SmartLED";
 }
 
 void IntelligentDigitalActuatorLED::run(){
@@ -150,7 +167,7 @@ void IntelligentDigitalActuatorLED::run(){
             if(state)luminosite_environment+=increment;
                 else luminosite_environment-=increment;
         }
-        if (state==LOW){
+        if (state==OFF){
             cout << "((((IDALeteint"<<luminosite_environment<<"))))\n";
         }else{
             cout << "((((IDALallume"<<luminosite_environment<<"))))\n";

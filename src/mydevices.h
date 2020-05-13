@@ -41,9 +41,9 @@ public:
 //definition de la classe generique pour tous les capteurs ON/OFF
 class DigitalSensor : public Sensor {
  protected:
-    //etat ON ou OFF du bouton
+    //etat ON ou OFF du capteur
     int state;
-    // temps entre 2 prises de valeurs
+    // temps avant un changement d'etat
     int temps;  
  public:
     
@@ -109,14 +109,16 @@ class Actuator : public Device {
  protected:
     int actuatorMode;
  public:
+    //Type d'actionneur
     virtual const char* getActuatorName() = 0;
 
     Actuator();
 };
 
+//definition de la classe generique pour tous les actionneurs analogiques
 class AnalogActuator : public Actuator {
  protected:
-  // valeur du capteur mesure
+  
   int val;
   // temps entre 2 prises de valeurs
   int temps;  
@@ -128,30 +130,46 @@ public:
     void setValue(int data);
 };
 
-// exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
-class DigitalActuatorLED: public Device {
+//definition de la classe generique pour tous les actionneurs ON/OFF
+class DigitalActuator : public Actuator {
+ protected:
+    //etat ON ou OFF de l'actionneur
+    int state;
+    // temps avant un changement d'etat
+    int temps;  
+ public:
+    
+    DigitalActuator(int time);
+
+    void setState(int newstate);
+};
+
+// exemple d'actionneur digital : une led.
+class DigitalActuatorLED: public DigitalActuator {
 private:
-  // etat de la LED
-  int state;
-  // temps entre 2 affichage de l etat de la led
-  int temps;
-  
+
 public:
-    // initialisation du temps de rafraichiisement
-  DigitalActuatorLED(int t);
+    // initialisation du temps de rafraichissement
+  DigitalActuatorLED(int time);
+ //Type d'actionneur
+    virtual const char* getActuatorName();
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
 };
 
 
 
-
-class IntelligentDigitalActuatorLED : public Device{
+class IntelligentDigitalActuatorLED : public DigitalActuator{
     private:
-        int increment, state, temps, pState;
+        //increment de luminosite
+        int increment; 
+        //etat precedent
+        int pState;
 public:
-    // initialisation du temps de rafraichiisement
-  IntelligentDigitalActuatorLED(int t, int inc);
+    // initialisation du temps de rafraichissement
+    IntelligentDigitalActuatorLED(int time, int inc);
+    //Type d'actionneur
+    virtual const char* getActuatorName();
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
 };
