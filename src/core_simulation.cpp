@@ -177,7 +177,8 @@ void Board::i2c(int addr,Device& dev){
 LCD::LCD(int c, int r){
     col=c;
     row=r;
-    setCursor(0,0);
+    cursorX=0;
+    cursorY=0;
     cursorBlinking=false;
     data.resize (col*row,' ');
 }
@@ -185,7 +186,8 @@ LCD::LCD(int c, int r){
 LCD::LCD(void){
     col=16;
     row=2;
-    setCursor(0,0);
+    cursorX=0;
+    cursorY=0;
     cursorBlinking=false;
     data.resize (col*row,' ');
 }
@@ -198,7 +200,7 @@ void LCD::display(void){
         cout <<"│";
         for(int c=0;c<col;c++){
             if(r==cursorY && c==cursorX){
-                 cout << "\033[5;41m"<<data[r*col+c]<<"\033[0m";
+                 cout << "\033["<<(cursorBlinking? '5' : '1')<<";41m"<<data[r*col+c]<<"\033[0m";    //ANSI escape code magic
             }else{
                 cout << data[r*col+c];
             }
@@ -221,6 +223,7 @@ void LCD::clear(void){
 void LCD::setCursor(int x, int y){
     cursorX=x;
     cursorY=y;
+    display();
 }
  
 
@@ -239,4 +242,5 @@ void LCD::print(string str){
 //active ou desactive la visiblilite du curseur
 void LCD::blink(bool state){
     cursorBlinking=state;
+    display();
 }
