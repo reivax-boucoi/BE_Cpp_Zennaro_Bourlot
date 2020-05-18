@@ -242,6 +242,13 @@ void LCD::print(string str){
     display();
 }
 
+void LCD::print(float val, int res){
+    stringstream stream;
+    stream << std::fixed << setprecision(res) << val;
+    string str = stream.str();
+    print(str);
+}
+
 //active ou desactive la visiblilite du curseur
 void LCD::blink(bool state){
     cursorBlinking=state;

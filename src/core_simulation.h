@@ -5,7 +5,8 @@
 #include <string>
 #include <thread>
 #include <mutex>
-
+#include <sstream>
+#include <iomanip>
 #define DELAY 1
 #define TEMP 22
 #define HIGH 1
@@ -65,8 +66,10 @@ public :
     void clear(void);
     //positonne le curseur
     void setCursor(int x, int y);
-    //affiche la chaine de caracteres sur l'ecran a partie de la position du curseur
+    //affiche la chaine de caracteres sur l'ecran a partir de la position du curseur
     void print(string str);
+    //affiche la valeur sur l'ecran a partir de la position du curseur et un nb de decimales donne
+    void print(float val, int res);
     //active ou desactive la visiblilite du curseur
     void blink(bool state);
     //recupere la position du curseur
