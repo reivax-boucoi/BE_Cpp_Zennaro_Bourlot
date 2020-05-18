@@ -22,18 +22,13 @@ void Board::loop(){
     static int cpt=0;
     static int bascule=0;
     int i=0;
-    for(i=0;i<10;i++){
+    for(i=0;i<5;i++){
         // lecture sur la pin 1 : capteur de temperature
         temp=analogRead(1);
         lum=analogRead(2);
         press=analogRead(5);
         sprintf(buf,"temperature %ddegC, lum %dlux, pressure %dPa",temp,lum,press);
         Serial.println(buf);
-        if(cpt%5==0){
-            // tous les 5 fois on affiche sur l ecran la temperature
-             sprintf(buf,"temperature %ddegC, lum %dlux, pressure %dPa",temp,lum,press);
-             //bus.write(1,buf,100);
-        }
         cpt++;
         sleep(1);
         

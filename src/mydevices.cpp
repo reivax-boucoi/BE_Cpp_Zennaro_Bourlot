@@ -51,7 +51,7 @@ void AnalogSensorLuminosity::run() {
 	while (1) {
 		alea = 1 - alea;
 		if (ptrmem != NULL)
-			*ptrmem = val + alea;
+			*ptrmem = luminosite_environment + alea;
 		sleep(temps);
 	}
 }
