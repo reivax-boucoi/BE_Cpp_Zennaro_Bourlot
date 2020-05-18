@@ -1,0 +1,73 @@
+@startuml
+
+title SmartMenuLCD - Class Diagram
+
+abstract class ScreenObject{
+    - int xLoc
+    - int yLoc
+    + void display(void)
+    + int select(void)
+}
+class Value{
+    + float currentValue
+    - int resolution
+    + void display(void)
+}
+
+class EditableValue{
+    - float min
+    - float max
+    - int currentDecade
+    + bool nextDecade(void)
+}
+
+class Text{
+    + string currentText
+    + void display(void)
+}
+abstract class EditableObject{
+    + bool selected
+    + void increment(void)
+    + void decrement(void)
+}
+
+class EditableText{
+    - int nbStrings
+     - string txt[]
+}
+
+class Screen{
+    - ScreenObject objects[]
+    - int currentObject
+    + string name
+    + void display(void)
+    + ScreenObject getNext(void)
+    + ScreenObject getPrev(void)
+
+}
+
+class Menu{
+    - Screen screens[]
+    - int currentScreen
+    - bool screenSelected
+    + void display(void)
+    + void enter(void)
+    + void back(void)
+    + void next(void)
+    + void prev(void)
+    
+}
+
+Value <|-- EditableValue
+
+EditableObject <|-- EditableValue
+
+EditableObject <|-- EditableText
+Text <|-- EditableText
+
+ScreenObject <|-- Text
+ScreenObject <|-- Value
+
+Screen "1"<--"1..*" ScreenObject
+Menu "1"<--"1..*" Screen
+@enduml

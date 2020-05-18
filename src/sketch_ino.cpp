@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include "core_simulation.h"
+#include "SmartMenuLCD.h"
 
 // la fonction d'initialisation d'arduino
 void Board::setup(){
