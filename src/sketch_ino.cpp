@@ -45,7 +45,7 @@ void Board::loop(){
 
     
 
-    /*myLcd.print("Hello");
+    myLcd.print("Hello");
     sleep(1);
     myLcd.print(" World !  1");
     sleep(1);
@@ -55,7 +55,7 @@ void Board::loop(){
     myLcd.setCursor(0,1);
     sleep(1);
     myLcd.blink(true);
-    while(1);*/
+    while(1);
 }
 
 
