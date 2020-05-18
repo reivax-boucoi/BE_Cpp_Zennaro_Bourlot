@@ -114,6 +114,9 @@ void Device::setI2CAddr(int addr, I2C * bus){
   i2cbus=bus;
 }
 
+string Device::getName(){
+    return name;
+}
 // classe representant une carte arduino
 void Board::run(){
   try{

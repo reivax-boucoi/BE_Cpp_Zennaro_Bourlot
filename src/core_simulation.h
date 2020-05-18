@@ -110,6 +110,8 @@ protected:
   int i2caddr;
     // lien sur l'objet representant le bus I2C
   I2C *i2cbus;
+    //nom du device
+  string name;
 public:
     // constructeur initialisant le minimum
     Device();
@@ -119,6 +121,8 @@ public:
     void setPinMem(unsigned short* ptr,enum typeio *c);
     // lien entre le device I2C et la carte arduino
     void setI2CAddr(int addr, I2C * bus);
+    //connaitre le nom du device
+    string getName();
 };
 
 // classe representant une carte arduino

@@ -23,10 +23,7 @@ int AnalogSensor::getValue(){
 
 //classe AnalogSensorTemperature
 AnalogSensorTemperature::AnalogSensorTemperature(int time,int value):AnalogSensor(time,value){
-}
-
-const char* AnalogSensorTemperature::getSensorName(){
-    return "TemperatureSensor";
+    name="TemperatureSensor";
 }
 
 void AnalogSensorTemperature::run(){
@@ -41,10 +38,7 @@ void AnalogSensorTemperature::run(){
 
 //classe AnalogSensorLuminosity
 AnalogSensorLuminosity::AnalogSensorLuminosity(int time,int value):AnalogSensor(time,value){
-}
-
-const char* AnalogSensorLuminosity::getSensorName(){
-    return "LuminositySensor";
+ name = "LuminositySensor";
 }
 
 void AnalogSensorLuminosity::run() {
@@ -58,10 +52,7 @@ void AnalogSensorLuminosity::run() {
 
 //classe AnalogSensorLuminosity
 AnalogSensorPressure::AnalogSensorPressure(int time,int value):AnalogSensor(time,value){
-}
-
-const char* AnalogSensorPressure::getSensorName(){
-    return "PressureSensor";
+  name = "PressureSensor";
 }
 
 void AnalogSensorPressure::run() {
@@ -84,10 +75,7 @@ int DigitalSensor::getState(){
 
 //classe ExternalDigitalSensorButton
 ExternalDigitalSensorButton::ExternalDigitalSensorButton(int time):DigitalSensor(time){
-}
-
-const char* ExternalDigitalSensorButton::getSensorName(){
-    return "Button";
+ name = "Button";
 }
 
 
@@ -131,10 +119,7 @@ void DigitalActuator::setState(int newstate){
 
 //classe DigitalActuatorLED
 DigitalActuatorLED::DigitalActuatorLED(int time):DigitalActuator(time){
-}
-
-const char* DigitalActuatorLED::getActuatorName(){
-    return "LED";
+ name = "LED";
 }
 
 void DigitalActuatorLED::run(){
@@ -153,11 +138,9 @@ void DigitalActuatorLED::run(){
 //classe IntelligentDigitalActuatorLED
 IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int time, int inc) : DigitalActuator(time), pState(OFF){
     increment=inc;
+    name="SmartLED";
 }
 
-const char* IntelligentDigitalActuatorLED::getActuatorName(){
-    return "SmartLED";
-}
 
 void IntelligentDigitalActuatorLED::run(){
   while(1){

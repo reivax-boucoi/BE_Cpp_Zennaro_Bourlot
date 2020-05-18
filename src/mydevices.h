@@ -16,8 +16,6 @@ class Sensor : public Device {
  protected:
     int sensorMode;
  public:
-    virtual const char* getSensorName() = 0;
-
     Sensor();
 };
 
@@ -59,8 +57,6 @@ private:
 public:
   //constructeur ne pas oublier d'initialiser la classe mere
   AnalogSensorTemperature(int time, int value);
-    //Type du capteur
-   virtual const char* getSensorName();
   // thread representant le capteur et permettant de fonctionner independamment de la board
   virtual void run();
 };
@@ -72,8 +68,6 @@ private:
 public:
 	//constructeur
 	AnalogSensorLuminosity(int time, int value);
-    //Type du capteur
-    virtual const char* getSensorName();
 	// thread representant le capteur et permettant de fonctionner independamment de la board
 	virtual void run();
 };
@@ -85,8 +79,6 @@ private:
 public:
 	//constructeur
 	AnalogSensorPressure(int time, int value);
-    //Type du capteur
-    virtual const char* getSensorName();
 	// thread representant le capteur et permettant de fonctionner independamment de la board
 	virtual void run();
 };
@@ -96,8 +88,6 @@ private :
     
 public :
     ExternalDigitalSensorButton(int time);
-    //Type du capteur
-    virtual const char* getSensorName();
     // thread representant le bouton et permettant de fonctionner independamment de la board
     virtual void run();
 };
@@ -109,8 +99,6 @@ class Actuator : public Device {
  protected:
     int actuatorMode;
  public:
-    //Type d'actionneur
-    virtual const char* getActuatorName() = 0;
 
     Actuator();
 };
@@ -151,8 +139,6 @@ private:
 public:
     // initialisation du temps de rafraichissement
   DigitalActuatorLED(int time);
- //Type d'actionneur
-    virtual const char* getActuatorName();
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
 };
@@ -168,8 +154,6 @@ class IntelligentDigitalActuatorLED : public DigitalActuator{
 public:
     // initialisation du temps de rafraichissement
     IntelligentDigitalActuatorLED(int time, int inc);
-    //Type d'actionneur
-    virtual const char* getActuatorName();
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
 };
