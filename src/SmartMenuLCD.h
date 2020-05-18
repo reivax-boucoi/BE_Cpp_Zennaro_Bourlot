@@ -5,22 +5,30 @@
 #include <vector>
 #include "core_simulation.h"
 
-class Screen{
-private:
+
+class Screen: public ScreenObject{
+protected:
+    vector<ScreenObject> objects;
+    int currentobject;
+    string name;
     
 public:
     Screen();
+    void displayObj();
+    ScreenObject getPrev();
+    ScreenObjectgetNext();
 };
 
 
-class SmartMenuLCD{
+class SmartMenuLCD: public Screen{
 private:
     vector<Screen> screens;
-    int currentScreen=0;
+    int currentScreen;
     bool screenSelected=false;
     
 public:
     SmartMenuLCD();
+    SmartMenuLCD(Screen s);
     void addScreen(Screen s);
     void display();
     void enter();
