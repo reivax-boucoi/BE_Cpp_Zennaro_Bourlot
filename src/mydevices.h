@@ -78,7 +78,7 @@ public:
 	virtual void run();
 };
 
-// Classe du capteur de pression
+// Classe du capteur de pression (en Pa)
 class AnalogSensorPressure : public AnalogSensor {
 private:
 

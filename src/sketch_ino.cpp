@@ -9,6 +9,7 @@ void Board::setup(){
   pinMode(1,INPUT); //temp sensor
   pinMode(2, INPUT);    //lum sensor
   pinMode(4, INPUT);    //btn
+  pinMode(5, INPUT);    //pressure sensor
   pinMode(0,OUTPUT);    //basic led
   pinMode(3,OUTPUT);    //intelligent led
   
@@ -17,20 +18,21 @@ void Board::setup(){
 // la boucle de controle arduino
 void Board::loop(){
     char buf[100];
-    int temp,lum;
+    int temp,lum,press;
     static int cpt=0;
     static int bascule=0;
     int i=0;
-   /* for(i=0;i<10;i++){
+    for(i=0;i<10;i++){
         // lecture sur la pin 1 : capteur de temperature
         temp=analogRead(1);
         lum=analogRead(2);
-        sprintf(buf,"temperature %d, lum %d",temp,lum);
+        press=analogRead(5);
+        sprintf(buf,"temperature %ddegC, lum %dlux, pressure %dPa",temp,lum,press);
         Serial.println(buf);
         if(cpt%5==0){
             // tous les 5 fois on affiche sur l ecran la temperature
-            // sprintf(buf,"%d",val);
-            // bus.write(1,buf,100);
+             sprintf(buf,"temperature %ddegC, lum %dlux, pressure %dPa",temp,lum,press);
+             //bus.write(1,buf,100);
         }
         cpt++;
         sleep(1);
@@ -43,8 +45,11 @@ void Board::loop(){
     }else{
         digitalWrite(0,LOW);
     }
-    bascule=1-bascule;*/
-    myLcd.print("Hello");
+    bascule=1-bascule;
+
+    
+
+    /*myLcd.print("Hello");
     sleep(1);
     myLcd.print(" World !  1");
     sleep(1);
@@ -54,7 +59,7 @@ void Board::loop(){
     myLcd.setCursor(0,1);
     sleep(1);
     myLcd.blink(true);
-    while(1);
+    while(1);*/
 }
 
 
