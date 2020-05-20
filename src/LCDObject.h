@@ -36,7 +36,8 @@ private:
 public:
     EditableValue(float *ptr, int x, int y, int nbDigits, int min, int max);
     bool advanceCursor(void);
-    
+    void increment(void);
+    void decrement(void);
     
 };
 

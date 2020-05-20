@@ -37,11 +37,24 @@ EditableValue::EditableValue(float *ptr, int x, int y, int nbDigits, int min, in
 
 bool EditableValue::advanceCursor(void){
   cursorPos++;
-  if (cursorPos >= nbDigits){
+  if (cursorPos >= nbDigits){//wrap around and exit editing mode
       cursorPos = 0;
+      (*valptr)=currentValue         //update real value with temporary edited value
       return true;
   }
   return false;
+}
+
+void EditableValue::increment(void) {
+  int p = nbDigits - DPpos - 1 - cursorPos;
+  currentValue +=  pow(10, p);
+  if (currentValue > maxVal)currentValue = maxVal;
+}
+
+void EditableValue::decrement(void) {
+  int p = nbDigits - DPpos - 1 - cursorPos;
+  currentValue -=  pow(10, p);
+  if (currentValue < minVal)currentValue = minVal;
 }
 
 
