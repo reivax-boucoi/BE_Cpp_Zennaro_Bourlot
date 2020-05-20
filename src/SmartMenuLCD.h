@@ -1,6 +1,6 @@
 #ifndef SMART_MENU_LCD_H
 #define SMART_MENU_LCD_H
-
+/*commented because it prevented proper project compilation
 #include <unistd.h>
 #include <vector>
 #include "core_simulation.h"
@@ -36,5 +36,5 @@ public:
     void next();
     void prev();
 };
-
+*/
 #endif

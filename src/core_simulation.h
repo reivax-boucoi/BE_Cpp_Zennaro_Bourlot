@@ -143,7 +143,6 @@ public:
     // representation de la liaison terminal
   Terminal Serial;
   
-  LCD myLcd;
     // threads representant chaque senseur/actionneur sur le bus I2C
   thread *tabthreadbus[MAX_I2C_DEVICES];
     

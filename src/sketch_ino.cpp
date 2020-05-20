@@ -1,9 +1,14 @@
 #include <unistd.h>
 #include "core_simulation.h"
-#include "SmartMenuLCD.h"
+//#include "SmartMenuLCD.h"
 #include "LCDObject.h"
 
+extern LCD myLcd;
+
 float pressure=0.0;
+float setTemp=23.0;
+Value v(&pressure,10,0,2);
+EditableValue setTempVal(&setTemp,10,1,1,-10,100);
 
 void Board::setup(){
     Serial.begin(9600);
@@ -13,19 +18,13 @@ void Board::setup(){
     pinMode(5, INPUT);    //pressure sensor
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
-
-    //Value press_value(&pressure,0,0,2);
-    myLcd.print("Hello");
-    sleep(1);
-    myLcd.print(" World !  1");
-    sleep(1);
+    
+    myLcd.print("Pressure :");
     myLcd.setCursor(0,1);
-    myLcd.print(">");
-    myLcd.print(5.41,1);
-    sleep(1);
-    myLcd.setCursor(0,1);
-    sleep(1);
-    myLcd.blink(true);
+    myLcd.print("Set temp :");
+    
+    v.display();
+    setTempVal.display();
 }
 
 void Board::loop(){
@@ -39,7 +38,6 @@ void Board::loop(){
         pressure=float(analogRead(5))/1000.0;
         sprintf(buf,"temperature %ddegC, lum %dlux, pressure %fkPa",temp,lum,pressure);
         //Serial.println(buf);
-        
         sleep(1);
         
         digitalWrite(3,digitalRead(4)); //btn ctrl smartled

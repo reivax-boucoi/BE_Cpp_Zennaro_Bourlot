@@ -5,8 +5,8 @@
 #include <vector>
 #include "core_simulation.h"
 
-class ScreenObject{
-private:
+class ScreenObject {
+protected:
     int x;
     int y;
     virtual void display(void)=0;
@@ -15,7 +15,7 @@ public:
 };
 
 class Value : public ScreenObject{
-private:
+protected:
     float *valptr;
     int resolution;
 public:
@@ -31,7 +31,9 @@ private:
     float maxVal;
     int currentDecade;
 public:
+    EditableValue(float *ptr, int x, int y, int resolution, int min, int max);
     bool nextDecade(void);
+    
     
 };
 
