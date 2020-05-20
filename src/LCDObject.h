@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <vector>
+#include <iterator>
 #include "core_simulation.h"
 
 class ScreenObject {
@@ -39,10 +40,25 @@ public:
 
 
 class Text : public ScreenObject{
-private:
-    
+protected:
+    string str;
 public:
-    
+    Text(string str, int x, int y);
+    void display(void);
+};
+
+
+class EditableText : public Text{
+private:
+    vector<string> texts;
+    vector<string>::iterator it;
+    int width;
+public:
+    EditableText(int x, int y, int width);
+    EditableText(string str, int x, int y, int width);
+    void addText(string str);
+    void next(void);
+    void prev(void);
 };
 
 #endif
