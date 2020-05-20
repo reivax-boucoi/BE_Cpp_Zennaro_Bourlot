@@ -195,6 +195,7 @@ LCD::LCD(void){
     data.resize (col*row,' ');
 }
 void LCD::display(void){
+    //cout << data<<endl;
     cout <<"\r\n┌";
     for(int c=0;c<col;c++)cout << "─";
     cout <<"┐"<<endl;
