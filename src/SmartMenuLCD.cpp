@@ -1,5 +1,5 @@
 #include "SmartMenuLCD.h"
-
+/*
 //methodes de la classe Screen
 Screen::Screen(){
     Text firstobj("*** MENU ***");
@@ -55,7 +55,7 @@ void SmartMenuLCD::back(){
 }
 
 
-
+*/
 
 
 

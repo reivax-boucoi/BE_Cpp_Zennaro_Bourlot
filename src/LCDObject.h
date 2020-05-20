@@ -18,9 +18,11 @@ public:
 class Value : public ScreenObject{
 protected:
     float *valptr;
-    int resolution;
+    int nbDigits;                 //the length of the number in chars(fixed so not to overlap any other chars)
+    int DPpos;                   //decimal point position
+    void setDPpos(void);        //updates DPpos based on current value && nbDigits required : changes resolution
 public:
-    Value(float *ptr, int x, int y, int resolution);
+    Value(float *ptr, int x, int y, int nbDigits);
     void display(void);
 };
 
@@ -30,10 +32,10 @@ private:
     float currentValue;
     float minVal;
     float maxVal;
-    int currentDecade;
+    int cursorPos=0;
 public:
-    EditableValue(float *ptr, int x, int y, int resolution, int min, int max);
-    bool nextDecade(void);
+    EditableValue(float *ptr, int x, int y, int nbDigits, int min, int max);
+    bool advanceCursor(void);
     
     
 };

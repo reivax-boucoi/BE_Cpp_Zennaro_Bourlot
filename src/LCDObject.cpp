@@ -9,22 +9,40 @@ ScreenObject::ScreenObject(int x, int y){
 }
 
 
-Value::Value(float *ptr, int x, int y, int resolution):ScreenObject(x,y){
-    this->resolution=resolution;
+Value::Value(float *ptr, int x, int y, int nbDigits):ScreenObject(x,y){
+    this->nbDigits=nbDigits;
     valptr=ptr;
 }
 void Value::display(void){
     myLcd.setCursor(x,y);
-    myLcd.print(*valptr,resolution);
+    setDPpos();
+    myLcd.print(*valptr,DPpos);
 }
 
+void Value::setDPpos(void){ //TODO generalize this for any length number
+if ( (*valptr) < 10.0) {
+    DPpos = nbDigits - 1;
+  } else if ((*valptr) < 100.0) {
+    DPpos = nbDigits - 2;
+  } else {
+    DPpos = 1;
+  }
+}
 
-EditableValue::EditableValue(float *ptr, int x, int y, int resolution, int min, int max):Value(ptr,x,y,resolution){
+EditableValue::EditableValue(float *ptr, int x, int y, int nbDigits, int min, int max):Value(ptr,x,y,nbDigits){
     minVal=min;
     maxVal=max;
-    currentDecade=0;
+    cursorPos=0;
 }
 
+bool EditableValue::advanceCursor(void){
+  cursorPos++;
+  if (cursorPos >= nbDigits){
+      cursorPos = 0;
+      return true;
+  }
+  return false;
+}
 
 
 Text::Text(string str, int x, int y):ScreenObject(x,y){

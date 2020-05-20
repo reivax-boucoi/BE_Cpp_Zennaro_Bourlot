@@ -7,8 +7,8 @@ extern LCD myLcd;
 
 float pressure=0.0;
 float setTemp=23.0;
-Value v(&pressure,10,0,2);
-EditableValue setTempVal(&setTemp,10,1,1,-10,100);
+Value v(&pressure,10,0,4);
+EditableValue setTempVal(&setTemp,10,1,3,-10,100);
 Text t1("Pressure :",0,0);
 EditableText t2("Text 1 : ",0,1,10);
 
@@ -52,7 +52,13 @@ void Board::loop(){
         sprintf(buf,"temperature %ddegC, lum %dlux, pressure %fkPa",temp,lum,pressure);
         //Serial.println(buf);
         sleep(1);
+            
+        t1.display();
+        v.display();
+        setTempVal.display();
+        t2.display();
         
+    
         digitalWrite(3,digitalRead(4)); //btn ctrl smartled
     }
     if(bascule){
