@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <vector>
 #include "core_simulation.h"
-
+#include "LCDObject.h"
 
 class Screen: public ScreenObject{
 protected:
@@ -15,8 +15,8 @@ protected:
 public:
     Screen();
     void displayObj();
-    ScreenObject getPrev();
-    ScreenObjectgetNext();
+    ScreenObject* getPrev();
+    ScreenObject* getNext();
 };
 
 
@@ -28,8 +28,8 @@ private:
     
 public:
     SmartMenuLCD();
-    SmartMenuLCD(Screen s);
-    void addScreen(Screen s);
+    SmartMenuLCD(Screen *s);
+    void addScreen(Screen *s);
     void display();
     void enter();
     void back();

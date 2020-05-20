@@ -7,6 +7,7 @@
 #include <mutex>
 #include <sstream>
 #include <iomanip>
+#include <typeinfo>
 #define DELAY 1
 #define TEMP 22
 #define HIGH 1
