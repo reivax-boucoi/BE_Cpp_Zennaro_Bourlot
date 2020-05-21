@@ -39,7 +39,7 @@ bool EditableValue::advanceCursor(void){
   cursorPos++;
   if (cursorPos >= nbDigits){//wrap around and exit editing mode
       cursorPos = 0;
-      (*valptr)=currentValue         //update real value with temporary edited value
+      (*valptr)=currentValue  ;       //update real value with temporary edited value
       return true;
   }
   return false;

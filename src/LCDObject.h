@@ -5,13 +5,14 @@
 #include <vector>
 #include <iterator>
 #include "core_simulation.h"
+#include "math.h"
 
 class ScreenObject {
 protected:
     int x;
     int y;
-    virtual void display(void)=0;
 public:
+    virtual void display(void)=0;
     ScreenObject(int x, int y);
 };
 

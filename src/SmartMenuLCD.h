@@ -1,40 +1,43 @@
 #ifndef SMART_MENU_LCD_H
 #define SMART_MENU_LCD_H
-/*commented because it prevented proper project compilation
+
 #include <unistd.h>
 #include <vector>
 #include "core_simulation.h"
 #include "LCDObject.h"
 
-class Screen: public ScreenObject{
+class Screen{
 protected:
-    vector<ScreenObject> objects;
-    int currentobject;
+    vector<ScreenObject*> objects;
+    unsigned int currentObject;
     string name;
     
 public:
     Screen();
-    void displayObj();
+    Screen(ScreenObject*firstobj);
+    void display();
     ScreenObject* getPrev();
     ScreenObject* getNext();
+
+    friend class SmartMenuLCD;
 };
 
 
-class SmartMenuLCD: public Screen{
+class SmartMenuLCD{
 private:
     vector<Screen> screens;
-    int currentScreen;
+    unsigned int currentScreen;
     bool screenSelected=false;
     
 public:
     SmartMenuLCD();
-    SmartMenuLCD(Screen *s);
-    void addScreen(Screen *s);
+    SmartMenuLCD(Screen s);
+    void addScreen(Screen s);
     void display();
     void enter();
     void back();
     void next();
     void prev();
 };
-*/
+
 #endif

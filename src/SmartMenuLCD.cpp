@@ -1,13 +1,41 @@
 #include "SmartMenuLCD.h"
-/*
+
+
 //methodes de la classe Screen
 Screen::Screen(){
-    Text firstobj("*** MENU ***");
-    objects.push_back(firstobj);
+   ScreenObject *firstobj = new Text("***MENU***",0,1);
+   objects.push_back(firstobj);
+    currentObject=0;
 }
-    
+
+Screen::Screen(ScreenObject*firstobj){
+   objects.push_back(firstobj);
+    currentObject=0;
+}
+
+ScreenObject* Screen::getPrev(){
+    return objects[++currentObject];
+}
+
+ScreenObject* Screen::getNext(){
+    return objects[--currentObject];
+}       
+
+void Screen::display(){
+ 
+     vector<ScreenObject*>::iterator itso;
+    for(itso=objects.begin();itso!=objects.end();itso++){
+             if(typeid(*itso)==typeid(Value)){
+              //   ((Value*)itso)->display();
+              } else {
+             // ((Text*)itso)->display();
+            }
+    }
+}
+
 
 //methodes de la classe SmartMenuLCD
+/*
 SmartMenuLCD::SmartMenuLCD(){
     
     Screen newScreen();
@@ -15,34 +43,33 @@ SmartMenuLCD::SmartMenuLCD(){
     screens.push_back(newScreen);
     currentScreen=0;   
 }
+*/
+/*
+SmartMenuLCD::SmartMenuLCD(Screen s){
 
-SmartMenuLCD::SmartMenuLCD(Screen *s){
-
-    screens.push_back(*s);
+    screens.push_back(s);
     currentScreen=0;   
 }
 
-void SmartMenuLCD::AddScreen(Screen *s){
-    screens.push_back(*s);
+void SmartMenuLCD::addScreen(Screen s){
+    screens.push_back(s);
 }
+*/
 
 void SmartMenuLCD::display(){
-    int i,j;
-    <ScreenObject>::iterator itso;
+    unsigned int i = 0;
+    
+    vector<Screen>::iterator itsc;
 
-    for (i=0;i<screens.size();i++){
-        if(i==currentScreen){
-            for(itso=screens[i].begin();itso=screens[i].end();itso++){
-                if(typeid(*itso)==typeid(Value)){
-                    mylcd.print(3.14,2);
-                } else {                    //donnees brutes pour tester...
-                    mylcd.print("MENU");
-                }
+    for (itsc=screens.begin();itsc!=screens.end();itsc++){
+        if(i==currentScreen && screenSelected==true){
+                (*itsc).display();
             }
         }
-    }
+        i++;
 }
 
+/*
 void SmartMenuLCD::enter(){
     currentScreen++;
     screenSelected=true;
@@ -51,12 +78,23 @@ void SmartMenuLCD::enter(){
 
 void SmartMenuLCD::back(){
     currentScreen--;
+    screenSelected=true;
+    display();
+}
+*/
+
+/*
+void SmartMenuLCD::next(){
+    currentScreen++;
+    screenSelected=true;
     display();
 }
 
-
+void SmartMenuLCD::prev(){
+    currentScreen--;
+    screenSelected=true;
+    display();
+}
 */
-
-
 
 
