@@ -49,7 +49,7 @@ void Board::loop(){
         temp=analogRead(1);
         lum=analogRead(2);
         pressure=float(analogRead(5))/1000.0;
-        sprintf(buf,"temperature %ddegC, lum %dlux, pressure %fkPa",temp,lum,pressure);
+        sprintf(buf,"temperature %d°C, lum %dlux, pressure %fkPa",temp,lum,pressure);
         //Serial.println(buf);
         sleep(1);
             

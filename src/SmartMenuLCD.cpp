@@ -26,50 +26,47 @@ void Screen::display(){
      vector<ScreenObject*>::iterator itso;
     for(itso=objects.begin();itso!=objects.end();itso++){
              if(typeid(*itso)==typeid(Value)){
-              //   ((Value*)itso)->display();
+                 ((Value*)(*itso))->display();
               } else {
-             // ((Text*)itso)->display();
+             ((Text*)(*itso))->display();
             }
     }
 }
 
 
 //methodes de la classe SmartMenuLCD
-/*
-SmartMenuLCD::SmartMenuLCD(){
-    
-    Screen newScreen();
 
+SmartMenuLCD::SmartMenuLCD(){   
+    Screen* newScreen = new Screen();
     screens.push_back(newScreen);
     currentScreen=0;   
 }
-*/
-/*
-SmartMenuLCD::SmartMenuLCD(Screen s){
 
+
+SmartMenuLCD::SmartMenuLCD(Screen *s){
     screens.push_back(s);
     currentScreen=0;   
 }
 
-void SmartMenuLCD::addScreen(Screen s){
+void SmartMenuLCD::addScreen(Screen *s){
     screens.push_back(s);
 }
-*/
+
 
 void SmartMenuLCD::display(){
     unsigned int i = 0;
     
-    vector<Screen>::iterator itsc;
+    vector<Screen*>::iterator itsc;
 
     for (itsc=screens.begin();itsc!=screens.end();itsc++){
         if(i==currentScreen && screenSelected==true){
-                (*itsc).display();
+                (*itsc)->display();
             }
         }
         i++;
 }
 
-/*
+
 void SmartMenuLCD::enter(){
     currentScreen++;
     screenSelected=true;
@@ -81,9 +78,8 @@ void SmartMenuLCD::back(){
     screenSelected=true;
     display();
 }
-*/
 
-/*
+
 void SmartMenuLCD::next(){
     currentScreen++;
     screenSelected=true;
@@ -95,6 +91,6 @@ void SmartMenuLCD::prev(){
     screenSelected=true;
     display();
 }
-*/
+
 
 
