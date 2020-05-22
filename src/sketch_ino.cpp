@@ -5,7 +5,7 @@
 
 extern LCD myLcd;
 
-//Objects
+//Objects for tests
 float pressure=0.0;
 float setTemp=23.0;
 Value v(&pressure,10,0,4);
@@ -13,7 +13,7 @@ EditableValue setTempVal(&setTemp,10,1,3,-10,100);
 Text t1("Pressure :",0,0);
 EditableText t2("Text 1 : ",0,1,10);
 
-//Menu
+//Screens for tests
 Screen *scr1 = new Screen();
 Text *t3 = new Text("Pressure :",0,1);
 Value *v1 = new Value(&pressure,10,1,4);

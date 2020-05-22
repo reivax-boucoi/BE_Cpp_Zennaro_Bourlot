@@ -69,7 +69,7 @@ void SmartMenuLCD::display(){
     vector<Screen*>::iterator itsc;
 
     for (itsc=screens.begin();itsc!=screens.end();itsc++){
-        if(i==currentScreen ){      //&& screenSelected==true
+        if(i==currentScreen && screenSelected==true){      
                 (*itsc)->display();
             }
         i++;
@@ -77,7 +77,7 @@ void SmartMenuLCD::display(){
         
 }
 
-void SmartMenuLCD::enter(){
+void SmartMenuLCD::enter(){ //to modify
     mylcd.clear();
  if(currentScreen<nbscreens) {
         currentScreen++;
@@ -86,7 +86,7 @@ void SmartMenuLCD::enter(){
     display();
 }
 
-void SmartMenuLCD::back(){
+void SmartMenuLCD::back(){  //to modify
     mylcd.clear();
     if(currentScreen>0) {
         currentScreen--;
