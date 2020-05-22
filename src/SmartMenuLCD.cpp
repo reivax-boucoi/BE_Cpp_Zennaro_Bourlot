@@ -1,5 +1,8 @@
 #include "SmartMenuLCD.h"
 
+LCD mylcd;
+
+unsigned int SmartMenuLCD::nbscreens=0;
 
 //methodes de la classe Screen
 Screen::Screen(){
@@ -39,17 +42,20 @@ void Screen::display(){
 SmartMenuLCD::SmartMenuLCD(){   
     Screen* newScreen = new Screen();
     screens.push_back(newScreen);
-    currentScreen=0;   
+    currentScreen=0;  
+    nbscreens++; 
 }
 
 
 SmartMenuLCD::SmartMenuLCD(Screen *s){
     screens.push_back(s);
-    currentScreen=0;   
+    currentScreen=0;  
+    nbscreens++;  
 }
 
 void SmartMenuLCD::addScreen(Screen *s){
     screens.push_back(s);
+    nbscreens++; 
 }
 
 
@@ -68,29 +74,42 @@ void SmartMenuLCD::display(){
 
 
 void SmartMenuLCD::enter(){
-    currentScreen++;
+    mylcd.clear();
+ if(currentScreen<nbscreens) {
+        currentScreen++;
+    }
     screenSelected=true;
     display();
 }
 
 void SmartMenuLCD::back(){
-    currentScreen--;
+    mylcd.clear();
+    if(currentScreen>0) {
+        currentScreen--;
+    }
     screenSelected=true;
     display();
 }
 
-
 void SmartMenuLCD::next(){
-    currentScreen++;
+    mylcd.clear();
+ if(currentScreen<nbscreens) {
+        currentScreen++;
+    }
     screenSelected=true;
     display();
 }
 
 void SmartMenuLCD::prev(){
-    currentScreen--;
+    mylcd.clear();
+    if(currentScreen>0) {
+        currentScreen--;
+    }
     screenSelected=true;
     display();
 }
+
+
 
 
 

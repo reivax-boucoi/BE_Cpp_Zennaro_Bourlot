@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include "core_simulation.h"
-//#include "SmartMenuLCD.h"
+#include "SmartMenuLCD.h"
 #include "LCDObject.h"
 
 extern LCD myLcd;

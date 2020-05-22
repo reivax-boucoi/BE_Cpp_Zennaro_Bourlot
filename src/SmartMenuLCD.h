@@ -6,6 +6,7 @@
 #include "core_simulation.h"
 #include "LCDObject.h"
 
+
 class Screen{
 protected:
     vector<ScreenObject*> objects;
@@ -27,6 +28,7 @@ class SmartMenuLCD{
 private:
     vector<Screen*> screens;
     unsigned int currentScreen;
+    static unsigned int nbscreens;
     bool screenSelected=false;
     
 public:
