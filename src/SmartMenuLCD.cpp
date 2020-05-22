@@ -6,7 +6,7 @@ unsigned int SmartMenuLCD::nbscreens=0;
 
 //methodes de la classe Screen
 Screen::Screen(){
-   ScreenObject *firstobj = new Text("***MENU***",0,1);
+   ScreenObject *firstobj = new Text("***MENU***",0,0);
    objects.push_back(firstobj);
     currentObject=0;
 }
@@ -14,6 +14,10 @@ Screen::Screen(){
 Screen::Screen(ScreenObject*firstobj){
    objects.push_back(firstobj);
     currentObject=0;
+}
+
+void Screen::addObject(ScreenObject*newObj){
+    objects.push_back(newObj);
 }
 
 ScreenObject* Screen::getPrev(){
@@ -65,13 +69,13 @@ void SmartMenuLCD::display(){
     vector<Screen*>::iterator itsc;
 
     for (itsc=screens.begin();itsc!=screens.end();itsc++){
-        if(i==currentScreen && screenSelected==true){
+        if(i==currentScreen ){      //&& screenSelected==true
                 (*itsc)->display();
             }
-        }
         i++;
+        }
+        
 }
-
 
 void SmartMenuLCD::enter(){
     mylcd.clear();

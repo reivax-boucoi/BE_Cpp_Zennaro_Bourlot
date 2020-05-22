@@ -5,12 +5,25 @@
 
 extern LCD myLcd;
 
+//Objects
 float pressure=0.0;
 float setTemp=23.0;
 Value v(&pressure,10,0,4);
 EditableValue setTempVal(&setTemp,10,1,3,-10,100);
 Text t1("Pressure :",0,0);
 EditableText t2("Text 1 : ",0,1,10);
+
+//Menu
+Screen *scr1 = new Screen();
+Text *t3 = new Text("Pressure :",0,1);
+Value *v1 = new Value(&pressure,10,1,4);
+
+Screen *scr2 = new Screen();
+Text *t4 = new Text("Temp :",0,1);
+Value *v2 = new Value(&setTemp,10,1,4);
+
+SmartMenuLCD *myMenu = new SmartMenuLCD(scr1);
+
 
 void Board::setup(){
     Serial.begin(9600);
@@ -21,14 +34,14 @@ void Board::setup(){
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
     
-    t1.display();
+   /* t1.display();
     v.display();
     setTempVal.display();
     
     t2.addText("Text 2 : ");
     t2.addText("Text 3 : ");
     t2.display();
-    /*t2.next();    //next and prev testing OK
+    t2.next();    //next and prev testing OK
     t2.display();
     t2.next();
     t2.display();
@@ -38,6 +51,21 @@ void Board::setup(){
     t2.display();
     t2.prev();
     t2.display();*/
+
+    //Test Menu...
+    scr1->addObject(t3);
+    scr1->addObject(v1);
+    //scr1->display();  //test ok
+    scr2->addObject(t4);
+    scr2->addObject(v2);
+    //scr2->display();    //test ok
+    myMenu->addScreen(scr2);
+    //myMenu->display();  //test ok  
+    myMenu->next();
+    myMenu->prev();
+    myMenu->next();
+    myMenu->next(); 
+
 }
 
 void Board::loop(){
@@ -53,10 +81,10 @@ void Board::loop(){
         //Serial.println(buf);
         sleep(1);
             
-        t1.display();
+        /*t1.display();
         v.display();
         setTempVal.display();
-        t2.display();
+        t2.display();*/
         
     
         digitalWrite(3,digitalRead(4)); //btn ctrl smartled

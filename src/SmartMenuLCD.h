@@ -16,6 +16,7 @@ protected:
 public:
     Screen();
     Screen(ScreenObject*firstobj);
+    void addObject(ScreenObject*newObj);
     void display();
     ScreenObject* getPrev();
     ScreenObject* getNext();
