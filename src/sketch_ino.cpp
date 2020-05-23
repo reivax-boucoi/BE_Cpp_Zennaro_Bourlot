@@ -22,7 +22,7 @@ Screen *scr2 = new Screen();
 Text *t4 = new Text("Temp :",0,1);
 Value *v2 = new Value(&setTemp,10,1,4);
 
-SmartMenuLCD *myMenu = new SmartMenuLCD(scr1);
+Menu *myMenu = new Menu(scr1);
 
 
 void Board::setup(){

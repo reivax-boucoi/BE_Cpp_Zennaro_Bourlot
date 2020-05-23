@@ -6,49 +6,55 @@ abstract class ScreenObject{
     - int xLoc
     - int yLoc
     + void display(void)
-    + int select(void)
 }
 class Value{
-    + float currentValue
-    - int resolution
+    - float* valptr
+    - int nbdigits
+    - int DPpos
+    + void setDPpos(void)
     + void display(void)
 }
 
 class EditableValue{
-    - float min
-    - float max
-    - int currentDecade
-    + bool nextDecade(void)
-}
-
-class Text{
-    + string currentText
-    + void display(void)
-}
-abstract class EditableObject{
-    + bool selected
+    - float minVal
+    - float maxVal
+    - int currentValue
+    - int cursorPos
+    + bool advanceCursor(void)
     + void increment(void)
     + void decrement(void)
 }
 
+class Text{
+    + string str
+    + void display(void)
+}
+
+
 class EditableText{
-    - int nbStrings
-     - string txt[]
+    - vector<string> texts
+    - vector<string>::iterator it
+    - int width
+    + void addText(string str)
+    + void next(void)
+    + void prev(void)
 }
 
 class Screen{
-    - ScreenObject objects[]
+    - vector<creenObject*> objects
     - int currentObject
     + string name
     + void display(void)
+    + addObject(ScreenObject* newObj)
     + ScreenObject getNext(void)
     + ScreenObject getPrev(void)
 
 }
 
 class Menu{
-    - Screen screens[]
+    - vector<Screen*> screens
     - int currentScreen
+    - static int nbscreens
     - bool screenSelected
     + void display(void)
     + void enter(void)
@@ -60,9 +66,6 @@ class Menu{
 
 Value <|-- EditableValue
 
-EditableObject <|-- EditableValue
-
-EditableObject <|-- EditableText
 Text <|-- EditableText
 
 ScreenObject <|-- Text

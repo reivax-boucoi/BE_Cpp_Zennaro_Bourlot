@@ -25,7 +25,7 @@ public:
 };
 
 
-class SmartMenuLCD{
+class Menu{
 private:
     vector<Screen*> screens;
     unsigned int currentScreen;
@@ -33,8 +33,8 @@ private:
     bool screenSelected=false;
     
 public:
-    SmartMenuLCD();
-    SmartMenuLCD(Screen *s);
+    Menu();
+    Menu(Screen *s);
     void addScreen(Screen *s);
     void display();
     void enter();

@@ -2,7 +2,7 @@
 
 LCD mylcd;
 
-unsigned int SmartMenuLCD::nbscreens=0;
+unsigned int Menu::nbscreens=0;
 
 //methodes de la classe Screen
 Screen::Screen(){
@@ -41,9 +41,9 @@ void Screen::display(){
 }
 
 
-//methodes de la classe SmartMenuLCD
+//methodes de la classe Menu
 
-SmartMenuLCD::SmartMenuLCD(){   
+Menu::Menu(){   
     Screen* newScreen = new Screen();
     screens.push_back(newScreen);
     currentScreen=0;  
@@ -51,19 +51,19 @@ SmartMenuLCD::SmartMenuLCD(){
 }
 
 
-SmartMenuLCD::SmartMenuLCD(Screen *s){
+Menu::Menu(Screen *s){
     screens.push_back(s);
     currentScreen=0;  
     nbscreens++;  
 }
 
-void SmartMenuLCD::addScreen(Screen *s){
+void Menu::addScreen(Screen *s){
     screens.push_back(s);
     nbscreens++; 
 }
 
 
-void SmartMenuLCD::display(){
+void Menu::display(){
     unsigned int i = 0;
     
     vector<Screen*>::iterator itsc;
@@ -77,7 +77,7 @@ void SmartMenuLCD::display(){
         
 }
 
-void SmartMenuLCD::enter(){ //to modify
+void Menu::enter(){ //to modify
     mylcd.clear();
  if(currentScreen<nbscreens) {
         currentScreen++;
@@ -86,7 +86,7 @@ void SmartMenuLCD::enter(){ //to modify
     display();
 }
 
-void SmartMenuLCD::back(){  //to modify
+void Menu::back(){  //to modify
     mylcd.clear();
     if(currentScreen>0) {
         currentScreen--;
@@ -95,7 +95,7 @@ void SmartMenuLCD::back(){  //to modify
     display();
 }
 
-void SmartMenuLCD::next(){
+void Menu::next(){
     mylcd.clear();
  if(currentScreen<nbscreens) {
         currentScreen++;
@@ -104,7 +104,7 @@ void SmartMenuLCD::next(){
     display();
 }
 
-void SmartMenuLCD::prev(){
+void Menu::prev(){
     mylcd.clear();
     if(currentScreen>0) {
         currentScreen--;
