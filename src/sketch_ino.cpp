@@ -14,13 +14,14 @@ Text t1("Pressure :",0,0);
 EditableText t2("Text 1 : ",0,1,10);
 
 //Screens for tests
-Screen *scr1 = new Screen();
-Text *t3 = new Text("Pressure :",0,1);
-Value *v1 = new Value(&pressure,10,1,4);
 
-Screen *scr2 = new Screen();
-Text *t4 = new Text("Temp :",0,1);
-Value *v2 = new Value(&setTemp,10,1,4);
+Text *t3 = new Text("Pressure:",0,0);
+Value *v1 = new Value(&pressure,10,1,4);
+Text *t4 = new Text("Temperature:",0,0);
+Value *v2 = new Value(&setTemp,12,1,2);
+
+Screen *scr1 = new Screen(t3,"Pressure");
+Screen *scr2 = new Screen(t4,"Temperature");
 
 Menu *myMenu = new Menu(scr1);
 
@@ -53,18 +54,17 @@ void Board::setup(){
     t2.display();*/
 
     //Test Menu...
-    scr1->addObject(t3);
     scr1->addObject(v1);
     //scr1->display();  //test ok
-    scr2->addObject(t4);
     scr2->addObject(v2);
     //scr2->display();    //test ok
     myMenu->addScreen(scr2);
-    //myMenu->display();  //test ok  
+    myMenu->display();  //test ok  
+    myMenu->next();
+    myMenu->enter();
+    myMenu->back();
     myMenu->next();
     myMenu->prev();
-    myMenu->next();
-    myMenu->next(); 
 
 }
 

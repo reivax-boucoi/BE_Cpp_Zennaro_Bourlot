@@ -11,13 +11,15 @@ class Screen{
 protected:
     vector<ScreenObject*> objects;
     unsigned int currentObject;
+    static unsigned int nbobjects;
     string name;
     
 public:
-    Screen();
-    Screen(ScreenObject*firstobj);
+    //Screen();
+    Screen(ScreenObject*firstobj, string nom);
     void addObject(ScreenObject*newObj);
     void display();
+    string getName();
     ScreenObject* getPrev();
     ScreenObject* getNext();
 
