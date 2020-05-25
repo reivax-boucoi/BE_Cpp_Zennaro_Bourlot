@@ -20,8 +20,8 @@ public:
     void addObject(ScreenObject*newObj);
     void display();
     string getName();
-    ScreenObject* getPrev();
-    ScreenObject* getNext();
+    void Next();
+    void Prev();
 
     friend class SmartMenuLCD;
 };
@@ -32,7 +32,6 @@ private:
     vector<Screen*> screens;
     unsigned int currentScreen;
     static unsigned int nbscreens;
-    bool screenSelected=false;
     
 public:
     Menu();

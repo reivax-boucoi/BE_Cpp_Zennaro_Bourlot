@@ -8,6 +8,7 @@ extern LCD myLcd;
 //Objects for tests
 float pressure=0.0;
 float setTemp=23.0;
+float setLum=200.0;
 Value v(&pressure,10,0,4);
 EditableValue setTempVal(&setTemp,10,1,3,-10,100);
 Text t1("Pressure :",0,0);
@@ -17,12 +18,14 @@ EditableText t2("Text 1 : ",0,1,10);
 
 Text *t3 = new Text("Pressure:",0,0);
 Value *v1 = new Value(&pressure,10,1,4);
-Text *t4 = new Text("Temperature:",0,0);
-Value *v2 = new Value(&setTemp,12,1,2);
+EditableText *t4 = new EditableText("Temp:",1,0,10);
+EditableValue *v2 = new EditableValue(&setTemp,12,0,1,-20,80);
+Text *t5 = new Text("Lum:",0,0);
+Value *v3 = new Value(&setLum,12,1,2);
 
 Screen *scr1 = new Screen(t3,"Pressure");
 Screen *scr2 = new Screen(t4,"Temperature");
-
+Screen *scr3 = new Screen(t5,"Luminosite");
 Menu *myMenu = new Menu(scr1);
 
 
@@ -53,18 +56,25 @@ void Board::setup(){
     t2.prev();
     t2.display();*/
 
-    //Test Menu...
+    //Test Menu...  
     scr1->addObject(v1);
-    //scr1->display();  //test ok
     scr2->addObject(v2);
-    //scr2->display();    //test ok
-    myMenu->addScreen(scr2);
+    scr3->addObject(v3);
+    
+    scr2->display();
+    scr2->Next(); 
+    scr2->Prev();  
+
+    ///////Tout ce qui suit fonctionne
+
+    /*myMenu->addScreen(scr2);
+    myMenu->addScreen(scr3);
     myMenu->display();  //test ok  
     myMenu->next();
     myMenu->enter();
     myMenu->back();
     myMenu->next();
-    myMenu->prev();
+    myMenu->prev();*/
 
 }
 

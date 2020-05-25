@@ -6,12 +6,6 @@ unsigned int Menu::nbscreens=0;
 unsigned int Screen::nbobjects=0;
 
 //methodes de la classe Screen
-/*Screen::Screen(){
-   ScreenObject *firstobj = new Text("*MENU*",0,10);
-   objects.push_back(firstobj);
-    currentObject=0;
-    nbobjects++;
-}*/
 
 Screen::Screen(ScreenObject*firstobj,string nom){
    objects.push_back(firstobj);
@@ -29,31 +23,37 @@ string Screen::getName(){
     return name;
 }
 
-
-ScreenObject* Screen::getPrev(){
-    int i;
-    
-    for(i=currentObject-1;i>=0;i--){
-        if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
-            currentObject=i;
-            return objects[i];
-        }
-    }
-    return objects[currentObject];
-       
-}
-
-ScreenObject* Screen::getNext(){
+void Screen::Next(){
     unsigned int i;
-    
+    if(currentObject==nbobjects-1) currentObject--;
     for(i=currentObject+1;i<nbobjects;i++){
         if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
             currentObject=i;
-            return objects[i];
+            mylcd.clear();
+            mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+            mylcd.print(">");
+            this->display();
+            break;
         }
     }
-    return objects[currentObject];
-}       
+}
+
+void Screen::Prev(){
+    int i;
+    if(currentObject==0) currentObject++;
+    for(i=currentObject-1;i>=0;i--){
+        if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
+            currentObject=i;
+            mylcd.clear();
+            mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+            mylcd.print(">");
+            this->display();
+            break;
+        }
+    }
+}
+
+
 
 void Screen::display(){
  
@@ -63,10 +63,10 @@ void Screen::display(){
                  ((Value*)(*itso))->display();
               } 
                 /*else if(typeid(*itso)==typeid(EditableValue){
-                    ((Value*)(*itso))->display();
+                    ((EditableValue*)(*itso))->display();
                 }
                 else if(typeid(*itso)==typeid(EditableText){
-                    ((Text*)(*itso))->display();
+                    ((EditableText*)(*itso))->display();
                 }*/
              else {
              ((Text*)(*itso))->display();

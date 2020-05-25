@@ -6,6 +6,8 @@ abstract class ScreenObject{
     - int xLoc
     - int yLoc
     + void display(void)
+    + int getx()
+    + int gety()
 }
 class Value{
     - float* valptr
@@ -43,11 +45,12 @@ class EditableText{
 class Screen{
     - vector<creenObject*> objects
     - int currentObject
-    + string name
+    - static int nbobjects
+    - string name
     + void display(void)
     + addObject(ScreenObject* newObj)
-    + ScreenObject getNext(void)
-    + ScreenObject getPrev(void)
+    + void Next(void)
+    + void Prev(void)
 
 }
 
@@ -55,7 +58,6 @@ class Menu{
     - vector<Screen*> screens
     - int currentScreen
     - static int nbscreens
-    - bool screenSelected
     + void display(void)
     + void enter(void)
     + void back(void)
