@@ -56,7 +56,7 @@ void Board::setup(){
      v2.decrement();
      v2.display();
      sleep(1);
-/*
+
 
     //Test Menu...  
     scr1.addObject(&v1);
@@ -66,7 +66,7 @@ void Board::setup(){
     scr2.display();
     scr2.Next(); 
     scr2.Prev();  
-*/
+
     ///////Tout ce qui suit fonctionne
 /*
     myMenu.addScreen(&scr2);
