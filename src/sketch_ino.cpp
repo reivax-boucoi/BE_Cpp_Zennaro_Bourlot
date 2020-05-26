@@ -10,76 +10,78 @@ float pressure=0.0;
 float setTemp=23.0;
 float setLum=200.0;
 Value v(&pressure,10,0,4);
-EditableValue setTempVal(&setTemp,10,1,3,-10,100);
+                            //(float *ptr, int x, int y, int nbDigits, int min, int max);
+EditableValue       setTempVal(  &setTemp,    10,     1,            3,     -10,     100);
 Text t1("Pressure :",0,0);
 EditableText t2("Text 1 : ",0,1,10);
 
 //Screens for tests
 
-Text *t3 = new Text("Pressure:",0,0);
-Value *v1 = new Value(&pressure,10,1,4);
-EditableText *t4 = new EditableText("Temp:",1,0,10);
-EditableValue *v2 = new EditableValue(&setTemp,12,0,1,-20,80);
-Text *t5 = new Text("Lum:",0,0);
-Value *v3 = new Value(&setLum,12,1,2);
+Text           t3("Pressure:",0,0);
+EditableText   t4("Temp:",1,0,10);
+Text           t5("Lum:",0,0);
+Value          v1(&pressure,10,1,4);
+EditableValue  v2(&setTemp,10,0,3,-20,80);
+Value          v3(&setLum,12,1,4);
 
-Screen *scr1 = new Screen(t3,"Pressure");
-Screen *scr2 = new Screen(t4,"Temperature");
-Screen *scr3 = new Screen(t5,"Luminosite");
-Menu *myMenu = new Menu(scr1);
+Screen scr1(&t3,"Pressure");
+Screen scr2(&t4,"Temperature");
+Screen scr3(&t5,"Luminosite");
+Menu   myMenu(&scr1);
 
 
 void Board::setup(){
     Serial.begin(9600);
-    pinMode(1,INPUT); //temp sensor
+    pinMode(1,INPUT);     //temp sensor
     pinMode(2, INPUT);    //lum sensor
     pinMode(4, INPUT);    //btn
     pinMode(5, INPUT);    //pressure sensor
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
-    
-   /* t1.display();
-    v.display();
-    setTempVal.display();
-    
-    t2.addText("Text 2 : ");
-    t2.addText("Text 3 : ");
-    t2.display();
-    t2.next();    //next and prev testing OK
-    t2.display();
-    t2.next();
-    t2.display();
-    t2.next();
-    t2.display();
-    t2.prev();
-    t2.display();
-    t2.prev();
-    t2.display();*/
+     v2.display();
+     cout << "Display"<<endl;
+     v2.advanceCursor();
+     v2.increment();
+     v2.display();
+     cout << "Display"<<endl;
+     v2.advanceCursor();
+     v2.increment();
+     v2.display();
+     cout << "Display"<<endl;
+     v2.advanceCursor();
+     v2.decrement();
+     v2.display();
+     cout << "Display"<<endl;
+     v2.advanceCursor();
+     v2.decrement();
+     v2.display();
+     cout << "Display"<<endl;
+/*
 
     //Test Menu...  
-    scr1->addObject(v1);
-    scr2->addObject(v2);
-    scr3->addObject(v3);
+    scr1.addObject(&v1);
+    scr2.addObject(&v2);
+    scr3.addObject(&v3);
     
-    scr2->display();
-    scr2->Next(); 
-    scr2->Prev();  
-
+    scr2.display();
+    scr2.Next(); 
+    scr2.Prev();  
+*/
     ///////Tout ce qui suit fonctionne
-
-    /*myMenu->addScreen(scr2);
-    myMenu->addScreen(scr3);
-    myMenu->display();  //test ok  
-    myMenu->next();
-    myMenu->enter();
-    myMenu->back();
-    myMenu->next();
-    myMenu->prev();*/
-
+/*
+    myMenu.addScreen(&scr2);
+    myMenu.addScreen(&scr3);
+    myMenu.display();  //test ok  
+    myMenu.next();
+    myMenu.enter();
+    myMenu.back();
+    myMenu.next();
+    myMenu.prev();
+*/
 }
 
 void Board::loop(){
-    char buf[100];
+    /*char buf[100];
     int temp,lum;
     static int bascule=0;
     int i=0;
@@ -91,10 +93,10 @@ void Board::loop(){
         //Serial.println(buf);
         sleep(1);
             
-        /*t1.display();
+        t1.display();
         v.display();
         setTempVal.display();
-        t2.display();*/
+        t2.display();
         
     
         digitalWrite(3,digitalRead(4)); //btn ctrl smartled
@@ -108,7 +110,7 @@ void Board::loop(){
 
     
 
-    while(1);
+    while(1);*/
 }
 
 

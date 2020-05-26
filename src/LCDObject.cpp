@@ -19,11 +19,28 @@ void Value::display(void){
     myLcd.print(*valptr,DPpos);
 }
 
+void EditableValue::display(void){
+    myLcd.setCursor(x,y);
+    setDPpos();
+    myLcd.print(currentValue,DPpos);
+    
+    myLcd.blink(editing);
+    if ((nbDigits - DPpos) <= cursorPos) {   //reset cursor to editing value
+      myLcd.setCursor(x + cursorPos + 1, y); // offset for comma symbol
+    } else {
+      myLcd.setCursor(x + cursorPos, y);    //no offset
+    }
+}
+
 void Value::setDPpos(void){ //TODO generalize this for any length number
 if ( (*valptr) < 10.0) {
     DPpos = nbDigits - 1;
   } else if ((*valptr) < 100.0) {
     DPpos = nbDigits - 2;
+  } else if ((*valptr) < 1000.0) {
+    DPpos = nbDigits - 3;
+  } else if ((*valptr) < 10000.0) {
+    DPpos = nbDigits - 4;
   } else {
     DPpos = 1;
   }
@@ -33,16 +50,22 @@ EditableValue::EditableValue(float *ptr, int x, int y, int nbDigits, int min, in
     minVal=min;
     maxVal=max;
     cursorPos=0;
+    currentValue=*ptr;
 }
 
-bool EditableValue::advanceCursor(void){
-  cursorPos++;
-  if (cursorPos >= nbDigits){//wrap around and exit editing mode
-      cursorPos = 0;
-      (*valptr)=currentValue  ;       //update real value with temporary edited value
-      return true;
-  }
-  return false;
+void EditableValue::advanceCursor(void){
+    if(!editing){   //enter editing mode
+        editing=true;
+        cursorPos=0;    //reset cursorPos
+    }else{
+        cursorPos++;
+        if (cursorPos >= nbDigits){//wrap around and exit editing mode
+            cursorPos = 0;
+            (*valptr)=currentValue  ;       //update real value with temporary edited value when exiting editing mode
+            editing=false;
+        }
+    }
+    myLcd.setCursor(x+cursorPos,y);   //reset cursor to editing value
 }
 
 void EditableValue::increment(void) {

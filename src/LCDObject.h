@@ -7,7 +7,7 @@
 #include "core_simulation.h"
 #include "math.h"
 
-class ScreenObject {
+class ScreenObject {        //holds objects present on a screen : Text, Value, EditableText, EditableValue
 protected:
     int x;
     int y;
@@ -32,22 +32,24 @@ public:
 
 class EditableValue : public Value{
 private:
-    float currentValue;
-    float minVal;
+    float currentValue;                //currently shown value, is different from the pointed value during editing
+    float minVal;                     //bounds for editing the value
     float maxVal;
     int cursorPos=0;
+    bool editing=false;
 public:
     EditableValue(float *ptr, int x, int y, int nbDigits, int min, int max);
-    bool advanceCursor(void);
-    void increment(void);
-    void decrement(void);
+    void advanceCursor(void);          //select the next decade to edit or exit editing mode
+    void increment(void);             // increment the selected decade
+    void decrement(void);            // "" ""
+    void display(void);
     
 };
 
 
 class Text : public ScreenObject{
 protected:
-    string str;
+    string str;                  //displayed text
 public:
     Text(string str, int x, int y);
     void display(void);
@@ -56,15 +58,15 @@ public:
 
 class EditableText : public Text{
 private:
-    vector<string> texts;
-    vector<string>::iterator it;
-    int width;
+    vector<string> texts;             //vector of possible texts
+    vector<string>::iterator it;     //current displayed text
+    int width;                      //nb char width (fixed so not to overlap any other chars)
 public:
     EditableText(int x, int y, int width);
     EditableText(string str, int x, int y, int width);
     void addText(string str);
-    void next(void);
-    void prev(void);
-};
+    void next(void);                 //cycle through texts
+    void prev(void);                // "" ""
+};  
 
 #endif
