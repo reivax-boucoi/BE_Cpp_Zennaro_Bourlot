@@ -32,8 +32,8 @@ Screen         scr1(&t1s1,"Temperature");
 Value          v1(&pressure,10,1,4);
 Value          v3(&lum,12,1,4);
 
-Screen scr2(&t4,"Temperature");
-Screen scr3(&t5,"Luminosite");
+Screen scr2(&v1,"Temperature");
+Screen scr3(&v3,"Luminosite");
 Menu   myMenu(&scr1);
 
 
@@ -59,7 +59,6 @@ void Board::setup(){
 
 void Board::loop(){
     
-    int lum;
     currTemp=analogRead(1);
     lum=analogRead(2);
     pressure=float(analogRead(5))/1000.0;

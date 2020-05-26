@@ -43,6 +43,7 @@ public:
     void increment(void);             // increment the selected decade
     void decrement(void);            // "" ""
     void display(void);
+    bool isEditing(void){return editing;}
     
 };
 
@@ -61,12 +62,14 @@ private:
     vector<string> texts;             //vector of possible texts
     vector<string>::iterator it;     //current displayed text
     int width;                      //nb char width (fixed so not to overlap any other chars)
+    bool editing=false;
 public:
     EditableText(int x, int y, int width);
     EditableText(string str, int x, int y, int width);
     void addText(string str);
     void next(void);                 //cycle through texts
     void prev(void);                // "" ""
+    bool isEditing(void){return editing;}
 };  
 
 #endif
