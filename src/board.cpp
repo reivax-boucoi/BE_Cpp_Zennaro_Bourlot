@@ -6,12 +6,12 @@ int main(){
   // creation d'une board
   Board esp8266;
   // achat des senseurs et actionneurs
-  AnalogSensorTemperature temperature(DELAY*2,TEMP);
-  AnalogSensorLuminosity luminosite(DELAY*2,luminosite_environment);
-  DigitalActuatorLED led1(DELAY*2);
-  IntelligentDigitalActuatorLED led2(DELAY*2,50);
-  ExternalDigitalSensorButton btn1(DELAY*2);
-  AnalogSensorPressure pressure(DELAY*2,101325);
+  AnalogSensorTemperature temperature(DELAY*20,TEMP);
+  AnalogSensorLuminosity luminosite(DELAY*20,luminosite_environment);
+  DigitalActuatorLED led1(DELAY*20);
+  IntelligentDigitalActuatorLED led2(DELAY*20,50);
+  ExternalDigitalSensorButton btn1(DELAY*20);
+  AnalogSensorPressure pressure(DELAY*20,101325);
   I2CActuatorScreen screen;
   
   

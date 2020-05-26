@@ -39,8 +39,13 @@ void Screen::Next(){
             }
         }
     } else {
-           ((EditableValue*)objects[currentObject])->increment();
-        }  
+        if(typeid(*objects[currentObject])==typeid(EditableValue)){
+            ((EditableValue*)objects[currentObject])->increment();
+        }else{  //it is an EditableText
+            ((EditableText*)objects[currentObject])->next();
+
+        }
+    }  
 }
 
 //Methode permettant de selectionner l'objet editable precedent affiche sur l'ecran
@@ -59,8 +64,13 @@ void Screen::Prev(){
              }
         }
     } else {
-           ((EditableValue*)objects[currentObject])->decrement();
-        }  
+        if(typeid(*objects[currentObject])==typeid(EditableValue)){
+            ((EditableValue*)objects[currentObject])->decrement();
+        }else{  //it is an EditableText
+            ((EditableText*)objects[currentObject])->prev();
+            
+        }
+    }  
 }
 
 //Methode permettant d'afficher tous les textes/valeurs de l'ecran courant
@@ -77,13 +87,13 @@ void Screen::enter(){
     if(typeid(*objects[currentObject])==typeid(EditableValue)){
         editing=true;
     }
-    this->display();
+   display();
 }
 
 void Screen::back(){
     editing=false;
     currentObject=0;
-    this->display();
+    display();
 }
 /*********** Constructeurs/methodes de la classe Menu *************/
 
