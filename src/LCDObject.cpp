@@ -8,6 +8,12 @@ ScreenObject::ScreenObject(int x, int y){
     this->y=y;
 }
 
+int ScreenObject::getx(){
+    return x;
+};
+int ScreenObject::gety(){
+    return y;
+};
 
 Value::Value(float *ptr, int x, int y, int nbDigits):ScreenObject(x,y){
     this->nbDigits=nbDigits;

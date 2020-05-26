@@ -13,8 +13,8 @@ protected:
     int y;
 public:
     virtual void display(void)=0;
-    int getx(){return x;};
-    int gety(){return y;};
+    int getx();
+    int gety();
     ScreenObject(int x, int y);
 };
 
