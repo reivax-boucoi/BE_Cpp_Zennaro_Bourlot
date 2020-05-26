@@ -13,6 +13,7 @@ protected:
     unsigned int currentObject;
     unsigned int nbobjects=0;
     string name;
+    bool editing=false;
     
 public:
     Screen(ScreenObject*firstobj, string nom);
@@ -22,7 +23,6 @@ public:
     void Next();
     void Prev();
 
-    friend class SmartMenuLCD;
 };
 
 //classe relative au menu principal
@@ -31,9 +31,9 @@ private:
     vector<Screen*> screens;
     unsigned int currentScreen;
     unsigned int nbscreens=0;
+    bool screenEntered=false;
     
 public:
-    Menu();
     Menu(Screen *s);
     void addScreen(Screen *s);
     void display();
