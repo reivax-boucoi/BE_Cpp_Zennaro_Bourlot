@@ -39,8 +39,7 @@ void Screen::Next(){
             }
         }
     } else {
-            if(typeid(*objects[currentObject])==typeid(EditableValue))
-                    ((EditableValue*)objects[currentObject])->increment();
+           ((EditableValue*)objects[currentObject])->increment();
         }  
 }
 
@@ -60,8 +59,7 @@ void Screen::Prev(){
              }
         }
     } else {
-            if(typeid(*objects[currentObject])==typeid(EditableValue))
-                    ((EditableValue*)objects[currentObject])->decrement();
+           ((EditableValue*)objects[currentObject])->decrement();
         }  
 }
 
@@ -76,7 +74,10 @@ void Screen::display(){
 }
 
 void Screen::enter(){
-    //
+    if(typeid(*objects[currentObject])==typeid(EditableValue)){
+        editing=true;
+    }
+    this->display();
 }
 
 void Screen::back(){
