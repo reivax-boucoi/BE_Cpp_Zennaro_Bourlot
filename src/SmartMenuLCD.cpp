@@ -159,7 +159,7 @@ void Menu::next(){
     if(screenEntered){
         screens[currentScreen]->Next();
     }else{
-        if(currentScreen<nbscreens) {
+        if(currentScreen<nbscreens-1) {
             currentScreen++;
         }
         display();
