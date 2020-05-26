@@ -25,7 +25,7 @@ public:
     friend class SmartMenuLCD;
 };
 
-//classe relatif au menu principale
+//classe relative au menu principal
 class Menu{
 private:
     vector<Screen*> screens;

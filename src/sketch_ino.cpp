@@ -2,12 +2,15 @@
 #include "core_simulation.h"
 #include "SmartMenuLCD.h"
 #include "LCDObject.h"
+#include "Encoder.h"
+
 
 extern LCD myLcd;
 
 //Objects for tests
 float setTemp=23.0; 
 float currTemp=24.0;
+float lum=200.0;
 float setLum=200.0;
 float setPres=100.0;    //kPa
 float currPres=101;     //kPa
@@ -114,36 +117,31 @@ void Board::setup(){
 }
 
 void Board::loop(){
-    /*char buf[100];
-    int temp,lum;
-    static int bascule=0;
-    int i=0;
-    for(i=0;i<5;i++){
-        temp=analogRead(1);
-        lum=analogRead(2);
-        pressure=float(analogRead(5))/1000.0;
-        sprintf(buf,"temperature %d°C, lum %dlux, pressure %fkPa",temp,lum,pressure);
-        //Serial.println(buf);
-        sleep(1);
+    
+    currTemp=analogRead(1);
+    lum=analogRead(2);
+    pressure=float(analogRead(5))/1000.0;
+    
+    digitalWrite(3,digitalRead(4)); //btn ctrl smartled
+    char enc = getEncoderValue();
+    switch(enc){
+        case '+':
+            myMenu.next();
+            break;
+        case '-':
+            myMenu.prev();
+            break;
+        case 'e':
+            myMenu.enter();
+            break;
+        case 'b':
+            myMenu.back();
+            break;
             
-        t1.display();
-        v.display();
-        setTempVal.display();
-        t2.display();
-        
-    
-        digitalWrite(3,digitalRead(4)); //btn ctrl smartled
+        default :
+            //do nothing
+            break;
     }
-    if(bascule){
-        digitalWrite(0,HIGH);
-    }else{
-        digitalWrite(0,LOW);
-    }
-    bascule=1-bascule;
-
-    
-
-    while(1);*/
 }
 
 
