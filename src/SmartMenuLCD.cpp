@@ -85,8 +85,9 @@ void Screen::display(){
 }
 
 void Screen::enter(){
-    if(typeid(*objects[currentObject])==typeid(EditableValue)){
+    if(typeid(*objects[currentObject])==typeid(EditableValue) || typeid(*objects[currentObject])==typeid(EditableText)){
         editing=true;
+         if(typeid(*objects[currentObject])==typeid(EditableValue))((EditableValue*)objects[currentObject])->advanceCursor();
     }
    display();
 }

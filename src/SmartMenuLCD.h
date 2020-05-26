@@ -13,6 +13,7 @@ protected:
     unsigned int currentObject;
     unsigned int nbobjects=0;
     string name;
+    bool editing=false;
     
 public:
     Screen(ScreenObject*firstobj, string nom);
