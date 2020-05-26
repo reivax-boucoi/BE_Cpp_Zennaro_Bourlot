@@ -44,14 +44,45 @@ void Board::setup(){
     pinMode(5, INPUT);    //pressure sensor
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
+<<<<<<< HEAD
+=======
+     v2.display();
+     sleep(1);
+     v2.advanceCursor();
+     v2.increment();
+     v2.display();
+     sleep(1);
+     v2.advanceCursor();
+     v2.increment();
+     v2.display();
+     sleep(1);
+     v2.advanceCursor();
+     v2.decrement();
+     v2.display();
+     sleep(1);
+     v2.advanceCursor();
+     v2.decrement();
+     v2.display();
+     sleep(1);
+
+>>>>>>> d0ecce1f045f5fcfdec9bbfc10fd9e38d4564bcc
 
     //Filling menus
     scr1.addObject(&t2s1);
     scr1.addObject(&v1s1);
     scr1.addObject(&v2s1);
     
+<<<<<<< HEAD
     
     myMenu.addScreen(&scr1);
+=======
+    scr2.display();
+    scr2.Next(); 
+    scr2.Prev();  
+
+    ///////Tout ce qui suit fonctionne
+/*
+>>>>>>> d0ecce1f045f5fcfdec9bbfc10fd9e38d4564bcc
     myMenu.addScreen(&scr2);
     myMenu.display();
 }

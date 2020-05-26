@@ -6,7 +6,7 @@
 #include "core_simulation.h"
 #include "LCDObject.h"
 
-
+//classe Screen
 class Screen{
 protected:
     vector<ScreenObject*> objects;
@@ -15,7 +15,6 @@ protected:
     string name;
     
 public:
-    //Screen();
     Screen(ScreenObject*firstobj, string nom);
     void addObject(ScreenObject*newObj);
     void display();
@@ -26,7 +25,7 @@ public:
     friend class SmartMenuLCD;
 };
 
-
+//classe relatif au menu principale
 class Menu{
 private:
     vector<Screen*> screens;
