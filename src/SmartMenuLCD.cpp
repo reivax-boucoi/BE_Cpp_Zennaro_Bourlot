@@ -34,7 +34,6 @@ void Screen::Next(){
                 mylcd.clear();
                 mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
                 mylcd.print(">");
-                this->display();
                 break;
             }
         }
@@ -46,6 +45,7 @@ void Screen::Next(){
 
         }
     }  
+    display();
 }
 
 //Methode permettant de selectionner l'objet editable precedent affiche sur l'ecran
@@ -70,7 +70,8 @@ void Screen::Prev(){
             ((EditableText*)objects[currentObject])->prev();
             
         }
-    }  
+    } 
+    display(); 
 }
 
 //Methode permettant d'afficher tous les textes/valeurs de l'ecran courant

@@ -73,7 +73,7 @@ Text           t1s4("Set pres:",0,0);
 Text           t2s4("Curr pres:",1,1);
 EditableValue  v1s4(&setPres,11,0,3,0,500);
 Value          v2s4(&currPres,12,1,3);
-Screen         scr4(&t1s1,"Pressure");
+Screen         scr4(&t1s4,"Pressure");
 
 Menu   myMenu(&scr1);
 
