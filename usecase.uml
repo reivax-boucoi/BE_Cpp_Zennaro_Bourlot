@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+
+title SmartMenuLCD - Use Case Diagram
+
+
+:User: 
+:Arduino:
+:LCD:
+
+
+
+package SmartMenuLCD {
+    (Display)
+    (Edit Value) 
+    (Navigate)
+}
+
+(Display) ...> LCD : Show
+
+User ---> (Navigate) : Enter/Back/Up/Down
+
+User ---> (Edit Value)  : Enter/Back/Up/Down
+
+(Navigate) .>(Display)
+(Display) <. (Edit Value) 
+@enduml
+
+(Display) <--- Arduino : Periodic display update
+(Display) <--- Arduino : Value changed
