@@ -15,7 +15,6 @@ float setLum=200.0;
 float setPres=100.0;    //kPa
 float currPres=101;     //kPa
 string setHeater="ON";
-string cool="Cooling:";
 string setCool="OFF";
 string setLight="ON";
 
@@ -29,7 +28,7 @@ Screen 1
 */
 Text           t1s1("Set temp:",0,0);
 Text           t2s1("Curr temp:",1,1);
-EditableValue  v1s1(&setTemp,11,0,3,-20,80);
+EditableValue  v1s1(&setTemp,12,0,3,-20,80);
 Value          v2s1(&currTemp,11,1,3);
 Screen         scr1(&t1s1,"Temperature");
 
@@ -42,7 +41,7 @@ Screen 2
 */
 
 Text           t1s2("Heater:",0,0);
-EditableText   t2s2(cool,1,1,8);
+Text           t2s2("Cooling:",0,1);
 EditableText   t3s2(setHeater,11,0,2);
 EditableText   t4s2(setCool,11,1,3);
 Screen         scr2(&t1s2,"Heating");

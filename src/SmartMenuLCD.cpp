@@ -76,7 +76,7 @@ void Screen::Prev(){
 //Methode permettant d'afficher tous les textes/valeurs de l'ecran courant
 void Screen::display(){
      vector<ScreenObject*>::iterator itso;
-     
+     mylcd.clear();
     for(itso=objects.begin();itso!=objects.end();itso++){
             (*itso)->display();
     }
@@ -147,8 +147,8 @@ void Menu::back(){
     }else{
         screenEntered=false;
         currentScreen=0;
-        display();
     }
+    display();
     
 }
 
@@ -161,8 +161,8 @@ void Menu::next(){
         if(currentScreen<nbscreens-1) {
             currentScreen++;
         }
-        display();
     }
+    display();
 }
 
 //Methode permettant de positionner le curseur de selection vers l'ecran precedent
@@ -174,8 +174,8 @@ void Menu::prev(){
         if(currentScreen>0) {
             currentScreen--;
         }
-        display();
     }
+    display();
 }
 
 
