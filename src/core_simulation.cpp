@@ -196,6 +196,7 @@ LCD::LCD(void){
 }
 void LCD::display(void){
     //cout << data<<endl;
+    cout << "\033[2J";
     cout <<"\r\n┌";
     for(int c=0;c<col;c++)cout << "─";
     cout <<"┐"<<endl;

@@ -39,23 +39,23 @@ void Board::setup(){
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
      v2.display();
-     cout << "Display"<<endl;
+     sleep(1);
      v2.advanceCursor();
      v2.increment();
      v2.display();
-     cout << "Display"<<endl;
+     sleep(1);
      v2.advanceCursor();
      v2.increment();
      v2.display();
-     cout << "Display"<<endl;
+     sleep(1);
      v2.advanceCursor();
      v2.decrement();
      v2.display();
-     cout << "Display"<<endl;
+     sleep(1);
      v2.advanceCursor();
      v2.decrement();
      v2.display();
-     cout << "Display"<<endl;
+     sleep(1);
 /*
 
     //Test Menu...  
