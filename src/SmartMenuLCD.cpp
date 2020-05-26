@@ -2,12 +2,6 @@
 
 LCD mylcd;
 
-//Variable comptant le nombre d'ecrans crees
-unsigned int Menu::nbscreens=0;
-//Variable comptant le nombre d'objets crees
-unsigned int Screen::nbobjects=0;
-
-
 /*********** Constructeurs/methodes de la classe Screen *************/
 
 //Constructeur d'objets de type Screen

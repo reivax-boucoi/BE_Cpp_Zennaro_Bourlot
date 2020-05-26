@@ -11,7 +11,7 @@ class Screen{
 protected:
     vector<ScreenObject*> objects;
     unsigned int currentObject;
-    static unsigned int nbobjects;
+    unsigned int nbobjects=0;
     string name;
     
 public:
@@ -30,7 +30,7 @@ class Menu{
 private:
     vector<Screen*> screens;
     unsigned int currentScreen;
-    static unsigned int nbscreens;
+    unsigned int nbscreens=0;
     
 public:
     Menu();

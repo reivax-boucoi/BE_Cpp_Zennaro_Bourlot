@@ -6,10 +6,16 @@
 extern LCD myLcd;
 
 //Objects for tests
-float pressure=0.0;
-float setTemp=23.0;
+float setTemp=23.0; 
 float currTemp=24.0;
 float setLum=200.0;
+float setPres=100.0;    //kPa
+float currPres=101;     //kPa
+string setHeater="ON";
+string cool="Cooling:";
+string setCool="OFF";
+string setLight="ON";
+
 
 /*
 Screen 1 
@@ -18,20 +24,54 @@ Screen 1
 │Curr temp: 24.0 │
 └────────────────┘
 */
-Text           t1s1("Set temp :",0,0);
-Text           t2s1("Curr temp:",1,0);
+Text           t1s1("Set temp:",0,0);
+Text           t2s1("Curr temp:",1,1);
 EditableValue  v1s1(&setTemp,11,0,3,-20,80);
-Value          v2s1(&currTemp,11,0,3);
+Value          v2s1(&currTemp,11,1,3);
 Screen         scr1(&t1s1,"Temperature");
 
+/*
+Screen 2 
+┌────────────────┐
+│Heater : ON     │
+│Cooling : OFF   │
+└────────────────┘
+*/
 
+Text           t1s2("Heater:",0,0);
+EditableText   t2s2(cool,1,1,8);
+EditableText   t3s2(setHeater,11,0,2);
+EditableText   t4s2(setCool,11,1,3);
+Screen         scr2(&t1s2,"Heating");
 
+/*
+Screen 3
+┌────────────────┐
+│Luminosity: 200 │
+│Light : ON      │
+└────────────────┘
+*/
 
-Value          v1(&pressure,10,1,4);
-Value          v3(&setLum,12,1,4);
+Text           t1s3("Luminosity:",0,0);
+Text           t2s3("Light:",0,1);
+EditableValue  v1s3(&setLum,13,0,3,0,900);
+EditableText   t3s3(setLight,9,1,2);
+Screen         scr3(&t1s3,"Luminosity");
 
-Screen scr2(&t4,"Temperature");
-Screen scr3(&t5,"Luminosite");
+/*
+Screen 4
+┌────────────────┐
+│Set pres: 100   │
+│Curr pres: 101  │
+└────────────────┘
+*/
+
+Text           t1s4("Set pres:",0,0);
+Text           t2s4("Curr pres:",1,1);
+EditableValue  v1s4(&setPres,11,0,3,0,500);
+Value          v2s4(&currPres,12,1,3);
+Screen         scr4(&t1s1,"Pressure");
+
 Menu   myMenu(&scr1);
 
 
@@ -48,11 +88,28 @@ void Board::setup(){
     scr1.addObject(&t2s1);
     scr1.addObject(&v1s1);
     scr1.addObject(&v2s1);
-    
-    
-    myMenu.addScreen(&scr1);
+
+    scr2.addObject(&t2s2);
+    scr2.addObject(&t3s2);
+    scr2.addObject(&t4s2);
+
+    scr3.addObject(&t2s3);
+    scr3.addObject(&v1s3);
+    scr3.addObject(&t3s3);
+
+    scr4.addObject(&t2s4);
+    scr4.addObject(&v1s4);
+    scr4.addObject(&v2s4);
+
     myMenu.addScreen(&scr2);
+    myMenu.addScreen(&scr3);
+    myMenu.addScreen(&scr4);
+        
     myMenu.display();
+    myMenu.next();
+    myMenu.next();
+    myMenu.next();
+    myMenu.enter();
 }
 
 void Board::loop(){
