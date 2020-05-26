@@ -30,7 +30,7 @@ void EditableValue::display(void){
     setDPpos();
     myLcd.print(currentValue,DPpos);
     
-    myLcd.blink(editing);
+    myLcd.blink(editing);                    //blink if value is being edited
     if ((nbDigits - DPpos) <= cursorPos) {   //reset cursor to editing value
       myLcd.setCursor(x + cursorPos + 1, y); // offset for comma symbol
     } else {

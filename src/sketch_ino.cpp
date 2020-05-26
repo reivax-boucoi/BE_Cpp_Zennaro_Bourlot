@@ -8,20 +8,26 @@ extern LCD myLcd;
 //Objects for tests
 float pressure=0.0;
 float setTemp=23.0;
+float currTemp=24.0;
 float setLum=200.0;
-Value v(&pressure,10,0,4);
-                            //(float *ptr, int x, int y, int nbDigits, int min, int max);
-EditableValue       setTempVal(  &setTemp,    10,     1,            3,     -10,     100);
-Text t1("Pressure :",0,0);
-EditableText t2("Text 1 : ",0,1,10);
 
-//Screens for tests
+/*
+Screen 1 
+┌────────────────┐
+│Set temp : 23.0 │
+│Curr temp: 24.0 │
+└────────────────┘
+*/
+Text           t1s1("Set temp :",0,0);
+Text           t2s1("Curr temp:",1,0);
+EditableValue  v1s1(&setTemp,11,0,3,-20,80);
+Value          v2s1(&currTemp,11,0,3);
+Screen         scr1(&t1s1,"Temperature");
 
-Text           t3("Pressure:",0,0);
-EditableText   t4("Temp:",1,0,10);
-Text           t5("Lum:",0,0);
+
+
+
 Value          v1(&pressure,10,1,4);
-EditableValue  v2(&setTemp,10,0,3,-20,80);
 Value          v3(&setLum,12,1,4);
 
 Screen scr1(&t3,"Pressure");
@@ -38,46 +44,16 @@ void Board::setup(){
     pinMode(5, INPUT);    //pressure sensor
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
-     v2.display();
-     sleep(1);
-     v2.advanceCursor();
-     v2.increment();
-     v2.display();
-     sleep(1);
-     v2.advanceCursor();
-     v2.increment();
-     v2.display();
-     sleep(1);
-     v2.advanceCursor();
-     v2.decrement();
-     v2.display();
-     sleep(1);
-     v2.advanceCursor();
-     v2.decrement();
-     v2.display();
-     sleep(1);
-/*
 
-    //Test Menu...  
-    scr1.addObject(&v1);
-    scr2.addObject(&v2);
-    scr3.addObject(&v3);
+    //Filling menus
+    scr1.addObject(&t2s1);
+    scr1.addObject(&v1s1);
+    scr1.addObject(&v2s1);
     
-    scr2.display();
-    scr2.Next(); 
-    scr2.Prev();  
-*/
-    ///////Tout ce qui suit fonctionne
-/*
+    
+    myMenu.addScreen(&scr1);
     myMenu.addScreen(&scr2);
-    myMenu.addScreen(&scr3);
-    myMenu.display();  //test ok  
-    myMenu.next();
-    myMenu.enter();
-    myMenu.back();
-    myMenu.next();
-    myMenu.prev();
-*/
+    myMenu.display();
 }
 
 void Board::loop(){
