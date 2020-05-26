@@ -26,57 +26,66 @@ string Screen::getName(){
 //Methode permettant de selectionner le prochain objet editable affiche sur l'ecran
 void Screen::Next(){
     unsigned int i;
-    if(currentObject==nbobjects-1) currentObject--;
-    for(i=currentObject+1;i<nbobjects;i++){
-        if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
-            currentObject=i;
-            mylcd.clear();
-            mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
-            mylcd.print(">");
-            this->display();
-            break;
+    if(not(editing)) {
+        if(currentObject==nbobjects-1) currentObject--;
+        for(i=currentObject+1;i<nbobjects;i++){
+            if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
+                currentObject=i;
+                mylcd.clear();
+                mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+                mylcd.print(">");
+                this->display();
+                break;
+            }
         }
-    }
+    } else {
+            if(typeid(*objects[currentObject])==typeid(EditableValue))
+                    ((EditableValue*)objects[currentObject])->increment();
+        }  
 }
 
 //Methode permettant de selectionner l'objet editable precedent affiche sur l'ecran
 void Screen::Prev(){
     int i;
-    if(currentObject==0) currentObject++;
-    for(i=currentObject-1;i>=0;i--){
-        if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
-            currentObject=i;
-            mylcd.clear();
-            mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
-            mylcd.print(">");
-            this->display();
-            break;
+    if(not(editing)) {
+        if(currentObject==0) currentObject++;
+        for(i=currentObject-1;i>=0;i--){
+             if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
+                 currentObject=i;
+                 mylcd.clear();
+                 mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+                 mylcd.print(">");
+                 this->display();
+                 break;
+             }
         }
-    }
+    } else {
+            if(typeid(*objects[currentObject])==typeid(EditableValue))
+                    ((EditableValue*)objects[currentObject])->decrement();
+        }  
 }
 
 //Methode permettant d'afficher tous les textes/valeurs de l'ecran courant
 void Screen::display(){
- 
      vector<ScreenObject*>::iterator itso;
      
     for(itso=objects.begin();itso!=objects.end();itso++){
             (*itso)->display();
     }
+    if(editing) objects[currentObject]->display();//last to be displayed to keep last cursor pos
 }
 
+void Screen::enter(){
+    //
+}
 
+void Screen::back(){
+    editing=false;
+    currentObject=0;
+    this->display();
+}
 /*********** Constructeurs/methodes de la classe Menu *************/
 
-//constructeur par defaut initialisant un ecran proposant un affichage de la temperature
-Menu::Menu(){                                   
-    Text *obj = new Text("Temperature:",0,0);
-    string nom="Temperature";
-    Screen* newScreen = new Screen(obj,nom);
-    screens.push_back(newScreen);
-    currentScreen=0;  
-    nbscreens++; 
-}
 
 //constructeur initialisant un objet de type Screen donne pour l'ajouter au Menu principal
 Menu::Menu(Screen *s){
@@ -93,46 +102,69 @@ void Menu::addScreen(Screen *s){
 
 //Methode permettant d'afficher le Menu principale (les noms associes aux ecrans sont affiches)
 void Menu::display(){
-    unsigned int i;
-
-   mylcd.clear();
-    for (i=currentScreen;(i<currentScreen+2 && i<nbscreens);i++){
-        if(i==currentScreen){
-            mylcd.setCursor(0,i-currentScreen);
-            mylcd.print(">");
+    mylcd.clear();
+    if(screenEntered){
+        screens[currentScreen]->display();
+    }else{
+        for (unsigned int i=currentScreen;(i<currentScreen+2 && i<nbscreens);i++){
+            if(i==currentScreen){
+                mylcd.setCursor(0,i-currentScreen);
+                mylcd.print(">");
+            }
+            mylcd.setCursor(1,i-currentScreen);
+            mylcd.print(screens[i]->getName());
         }
-         mylcd.setCursor(1,i-currentScreen);
-         mylcd.print(screens[i]->getName());
     }
         
 }
 
 //Methode permettant de valider l'affichage de l'ecran selectionne
 void Menu::enter(){ 
-    mylcd.clear();
-    screens[currentScreen]->display();
+    if(screenEntered){
+        screens[currentScreen]->enter();
+    }else{
+        screenEntered=true;
+    }
+    display();
 }
 
 //Methode permettant de retourner au Menu principal ou de sortir d'une zone d'edition 
-void Menu::back(){  
-    currentScreen=0;
-    display();
+void Menu::back(){ 
+    if(screenEntered){
+        screens[currentScreen]->back();
+        if(true)screenEntered=false;    //TODO
+    }else{
+        screenEntered=false;
+        currentScreen=0;
+        display();
+    }
+    
 }
 
 //Methode permettant de positionner le curseur de selection vers l'ecran suivant
 void Menu::next(){
- if(currentScreen<nbscreens) {
-        currentScreen++;
+    
+    if(screenEntered){
+        screens[currentScreen]->Next();
+    }else{
+        if(currentScreen<nbscreens) {
+            currentScreen++;
+        }
+        display();
     }
-    display();
 }
 
 //Methode permettant de positionner le curseur de selection vers l'ecran precedent
 void Menu::prev(){
-    if(currentScreen>0) {
-        currentScreen--;
+    
+    if(screenEntered){
+        screens[currentScreen]->Prev();
+    }else{
+        if(currentScreen>0) {
+            currentScreen--;
+        }
+        display();
     }
-    display();
 }
 
 

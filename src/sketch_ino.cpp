@@ -107,20 +107,21 @@ void Board::setup(){
     myMenu.addScreen(&scr2);
     myMenu.addScreen(&scr3);
     myMenu.addScreen(&scr4);
-        
     myMenu.display();
+
     myMenu.next();
     myMenu.next();
     myMenu.next();
     myMenu.next();
     myMenu.enter();
+
 }
 
 void Board::loop(){
     
     currTemp=analogRead(1);
     lum=analogRead(2);
-    pressure=float(analogRead(5))/1000.0;
+    currPres=float(analogRead(5))/1000.0;
     
     digitalWrite(3,digitalRead(4)); //btn ctrl smartled
     char enc = getEncoderValue();

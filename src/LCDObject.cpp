@@ -86,6 +86,9 @@ void EditableValue::decrement(void) {
   if (currentValue < minVal)currentValue = minVal;
 }
 
+void EditableValue::setEditing(bool edit){
+    editing=edit;
+}
 
 Text::Text(string str, int x, int y):ScreenObject(x,y){
     this->str=str;

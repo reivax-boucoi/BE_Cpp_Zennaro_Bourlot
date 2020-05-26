@@ -44,6 +44,7 @@ public:
     void decrement(void);            // "" ""
     void display(void);
     bool isEditing(void){return editing;}
+    void setEditing(bool edit);
     
 };
 
