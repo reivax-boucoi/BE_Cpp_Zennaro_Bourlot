@@ -109,6 +109,7 @@ void Board::setup(){
     myMenu.next();
     myMenu.next();
     myMenu.next();
+    myMenu.next();
     myMenu.enter();
 }
 
