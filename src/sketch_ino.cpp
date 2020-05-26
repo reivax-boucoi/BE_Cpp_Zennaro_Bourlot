@@ -109,12 +109,6 @@ void Board::setup(){
     myMenu.addScreen(&scr4);
     myMenu.display();
 
-    myMenu.next();
-    myMenu.next();
-    myMenu.next();
-    myMenu.next();
-    myMenu.enter();
-
 }
 
 void Board::loop(){
