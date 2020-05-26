@@ -59,7 +59,7 @@ void Screen::Prev(){
                  mylcd.clear();
                  mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
                  mylcd.print(">");
-                 this->display();
+                // this->display();
                  break;
              }
         }
@@ -77,7 +77,6 @@ void Screen::Prev(){
 //Methode permettant d'afficher tous les textes/valeurs de l'ecran courant
 void Screen::display(){
      vector<ScreenObject*>::iterator itso;
-     mylcd.clear();
     for(itso=objects.begin();itso!=objects.end();itso++){
             (*itso)->display();
     }
@@ -147,7 +146,6 @@ void Menu::back(){
         screens[currentScreen]->back();
         if(true)screenEntered=false;    //TODO
     }else{
-        screenEntered=false;
         currentScreen=0;
     }
     display();
