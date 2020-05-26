@@ -2,6 +2,8 @@
 #include "core_simulation.h"
 #include "SmartMenuLCD.h"
 #include "LCDObject.h"
+#include "Encoder.h"
+
 
 extern LCD myLcd;
 
@@ -9,7 +11,7 @@ extern LCD myLcd;
 float pressure=0.0;
 float setTemp=23.0;
 float currTemp=24.0;
-float setLum=200.0;
+float lum=200.0;
 
 /*
 Screen 1 
@@ -28,7 +30,7 @@ Screen         scr1(&t1s1,"Temperature");
 
 
 Value          v1(&pressure,10,1,4);
-Value          v3(&setLum,12,1,4);
+Value          v3(&lum,12,1,4);
 
 Screen scr2(&t4,"Temperature");
 Screen scr3(&t5,"Luminosite");
@@ -56,36 +58,36 @@ void Board::setup(){
 }
 
 void Board::loop(){
-    /*char buf[100];
-    int temp,lum;
-    static int bascule=0;
-    int i=0;
-    for(i=0;i<5;i++){
-        temp=analogRead(1);
-        lum=analogRead(2);
-        pressure=float(analogRead(5))/1000.0;
-        sprintf(buf,"temperature %d°C, lum %dlux, pressure %fkPa",temp,lum,pressure);
-        //Serial.println(buf);
-        sleep(1);
+    
+    int lum;
+    currTemp=analogRead(1);
+    lum=analogRead(2);
+    pressure=float(analogRead(5))/1000.0;
+    
+    digitalWrite(3,digitalRead(4)); //btn ctrl smartled
+    char enc = getEncoderValue();
+    switch(enc){
+        case '+':
+            myMenu.next();
+            break;
+        case '-':
+            myMenu.prev();
+            break;
+        case 'e':
+            myMenu.enter();
+            break;
+        case 'b':
+            myMenu.back();
+            break;
             
-        t1.display();
-        v.display();
-        setTempVal.display();
-        t2.display();
-        
-    
-        digitalWrite(3,digitalRead(4)); //btn ctrl smartled
+        default :
+            //do nothing
+            break;
     }
-    if(bascule){
-        digitalWrite(0,HIGH);
-    }else{
-        digitalWrite(0,LOW);
-    }
-    bascule=1-bascule;
+  
 
     
 
-    while(1);*/
 }
 
 
