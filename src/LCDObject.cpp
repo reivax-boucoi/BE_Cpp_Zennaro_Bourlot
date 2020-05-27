@@ -98,6 +98,9 @@ void Text::display(void){
     myLcd.print(str);
 }
 
+string Text::getCurrentText(void){
+    return str;
+}
 
 
 EditableText::EditableText(int x, int y, int width):Text("",x,y){
