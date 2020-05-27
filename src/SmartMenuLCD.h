@@ -17,14 +17,12 @@ protected:
     int prevx=-1;
     int prevy=-1;
     unsigned int prev_obj=100;
-    bool found=false;
     
 public:
     Screen(ScreenObject*firstobj, string nom);
     void addObject(ScreenObject*newObj);
     void display();
     string getName();
-    bool getEditing(){return editing;};
     void Next();
     void Prev();
     void enter();

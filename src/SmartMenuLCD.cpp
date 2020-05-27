@@ -42,7 +42,6 @@ void Screen::Next(){
         for(i=currentObject+1;i<nbobjects;i++){
             if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                 currentObject=i;
-                //myLcd.clear();
                 myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
                 prevx=objects[i]->getx()-1;
                  prevy=objects[i]->gety();
@@ -58,9 +57,6 @@ void Screen::Next(){
             ((EditableText*)objects[currentObject])->next();
 
         }
-        //prev_obj=currentObject;
-        //prevx=objects[currentObject]->getx()-1;
-        //prevy=objects[currentObject]->gety();
     }  
     display();
 }
@@ -84,12 +80,10 @@ void Screen::Prev(){
         for(i=currentObject-1;i>=0;i--){
              if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                  currentObject=i;
-                // myLcd.clear();
                  myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
                  prevx=objects[i]->getx()-1;
                  prevy=objects[i]->gety();
                  myLcd.print(">");
-                // this->display();
                  break;
              }
         }
@@ -100,9 +94,6 @@ void Screen::Prev(){
             ((EditableText*)objects[currentObject])->prev();
             
         }
-       // prev_obj=currentObject;
-        //prevx=objects[currentObject]->getx()-1;
-        //prevy=objects[currentObject]->gety();
     } 
     display(); 
 }
@@ -183,8 +174,6 @@ void Menu::back(){
         if(screenEntered){
         screens[currentScreen]->back();
         tmp=1;
-       // screenEntered=false; 
-        //if(not(screens[currentScreen]->getEditing()))screenEntered=false;    //TODO
         }else{
             currentScreen=0;
             display();
