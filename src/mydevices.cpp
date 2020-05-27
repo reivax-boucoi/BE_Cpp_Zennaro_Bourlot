@@ -66,12 +66,10 @@ void AnalogSensorPressure::run() {
 
 //class DigitalSensor
 DigitalSensor::DigitalSensor(int time) : Sensor(), temps(time) {
-    state = OFF;
+    state=OFF;
+    if (ptrmem != NULL)*ptrmem=state;
 }
 
-int DigitalSensor::getState(){
-    return state;
-}
 
 //classe ExternalDigitalSensorButton
 ExternalDigitalSensorButton::ExternalDigitalSensorButton(int time):DigitalSensor(time){
@@ -103,18 +101,13 @@ Actuator::Actuator() : Device() {
 AnalogActuator::AnalogActuator(int time, int value) : Actuator(),val(value), temps(time) {
 }
 
-void AnalogActuator::setValue(int data){
-    val = data;
-}
 
 //classe DigitalActuator
 DigitalActuator::DigitalActuator(int time) : Actuator(), temps(time) {
     state = OFF;
+    if (ptrmem != NULL)*ptrmem=state;
 }
 
-void DigitalActuator::setState(int newstate){
-     state = newstate;
-}
 
 
 //classe DigitalActuatorLED
