@@ -5,9 +5,8 @@
 #include "Encoder.h"
 
 
-extern LCD myLcd;
 
-//Objects for tests
+//Variables shown on the LCD
 float setTemp=23.0; 
 float currTemp=24.0;
 float lum=200.0;
@@ -73,7 +72,7 @@ EditableValue  v1s4(&setPres,11,0,3,0,500);
 Value          v2s4(&currPres,12,1,3);
 Screen         scr4(&t1s4,"Pressure");
 
-Menu   myMenu(&scr1);
+Menu           myMenu(&scr1);
 
 
 void Board::setup(){
