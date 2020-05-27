@@ -14,9 +14,6 @@ float lum=200.0;
 float setLum=200.0;
 float setPres=100.0;    //kPa
 float currPres=101;     //kPa
-string setHeater="ON";
-string setCool="OFF";
-string setLight="ON";
 
 
 /*
@@ -42,8 +39,8 @@ Screen 2
 
 Text           t1s2("Heater:",0,0);
 Text           t2s2("Cooling:",0,1);
-EditableText   t3s2(setHeater,11,0,2);
-EditableText   t4s2(setCool,11,1,3);
+EditableText   t3s2("ON",11,0,3);
+EditableText   t4s2("DIS",11,1,3);
 Screen         scr2(&t1s2,"Heating");
 
 /*
@@ -57,7 +54,7 @@ Screen 3
 Text           t1s3("Luminosity:",0,0);
 Text           t2s3("Light:",0,1);
 EditableValue  v1s3(&setLum,13,0,3,0,900);
-EditableText   t3s3(setLight,9,1,2);
+EditableText   t3s3("ON",9,1,3);
 Screen         scr3(&t1s3,"Luminosity");
 
 /*
@@ -85,6 +82,11 @@ void Board::setup(){
     pinMode(5, INPUT);    //pressure sensor
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
+    
+    t3s2.addText("OFF");
+    t4s2.addText("ENA");
+    t3s3.addText("OFF");
+    
 
     //Filling menus
     scr1.addObject(&t2s1);
