@@ -55,6 +55,7 @@ protected:
 public:
     Text(string str, int x, int y);
     void display(void);
+    string getCurrentText(void);
 };
 
 
