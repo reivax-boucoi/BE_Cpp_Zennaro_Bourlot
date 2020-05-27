@@ -120,7 +120,16 @@ void Board::loop(){
     lum=analogRead(2);
     currPres=float(analogRead(5))/1000.0;
     
-    digitalWrite(3,t3s2.getCurrentText()=="ON");
+   
+    cout << "test here "<<t3s2.getCurrentText()<<endl;
+    if(t3s2.getCurrentText()=="ON"){
+       // cout << "ON"<<endl;
+         digitalWrite(0,HIGH);
+    } 
+    if(t3s2.getCurrentText()=="OFF"){
+        //cout << "OFF"<<endl;
+         digitalWrite(0,LOW);
+    }
     char enc = getEncoderValue();
     switch(enc){
         case '+':
