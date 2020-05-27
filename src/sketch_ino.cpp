@@ -118,7 +118,7 @@ void Board::loop(){
     lum=analogRead(2);
     currPres=float(analogRead(5))/1000.0;
     
-    digitalWrite(3,digitalRead(4)); //btn ctrl smartled
+    digitalWrite(3,t3s2.getCurrentText()=="ON");
     char enc = getEncoderValue();
     switch(enc){
         case '+':
