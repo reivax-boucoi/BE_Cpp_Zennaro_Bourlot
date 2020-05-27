@@ -14,6 +14,8 @@ protected:
     unsigned int nbobjects=0;
     string name;
     bool editing=false;
+    int prevx=-1;
+    int prevy=-1;
     
 public:
     Screen(ScreenObject*firstobj, string nom);

@@ -27,12 +27,20 @@ string Screen::getName(){
 void Screen::Next(){
     unsigned int i;
     if(not(editing)) {
+
+        if(prevx!=-1 && prevy !=-1) {
+            myLcd.setCursor(prevx,prevy);
+            myLcd.print(" ");      
+        }  
+
         if(currentObject==nbobjects-1) currentObject--;
         for(i=currentObject+1;i<nbobjects;i++){
             if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                 currentObject=i;
                 //myLcd.clear();
                 myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+                prevx=objects[i]->getx()-1;
+                 prevy=objects[i]->gety();
                 myLcd.print(">");
                 break;
             }
@@ -52,12 +60,20 @@ void Screen::Next(){
 void Screen::Prev(){
     int i;
     if(not(editing)) {
+
+        if(prevx!=-1 && prevy !=-1) {
+            myLcd.setCursor(prevx,prevy);
+            myLcd.print(" ");
+        }
+
         if(currentObject==0) currentObject++;
         for(i=currentObject-1;i>=0;i--){
              if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                  currentObject=i;
                 // myLcd.clear();
                  myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+                 prevx=objects[i]->getx()-1;
+                 prevy=objects[i]->gety();
                  myLcd.print(">");
                 // this->display();
                  break;
