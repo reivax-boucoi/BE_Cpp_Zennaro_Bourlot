@@ -26,13 +26,12 @@ string Screen::getName(){
 //Methode permettant de selectionner le prochain objet editable affiche sur l'ecran
 void Screen::Next(){
     unsigned int i;
-    if(not(editing)) {
-
-        if(prevx!=-1 && prevy !=-1) {
+    if(prevx!=-1 && prevy !=-1) {
             myLcd.setCursor(prevx,prevy);
             myLcd.print(" ");      
         }  
 
+    if(not(editing)) {
         if(currentObject==nbobjects-1) currentObject--;
         for(i=currentObject+1;i<nbobjects;i++){
             if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
@@ -52,6 +51,8 @@ void Screen::Next(){
             ((EditableText*)objects[currentObject])->next();
 
         }
+        prevx=objects[currentObject]->getx()-1;
+        prevy=objects[currentObject]->gety();
     }  
     display();
 }
@@ -59,12 +60,13 @@ void Screen::Next(){
 //Methode permettant de selectionner l'objet editable precedent affiche sur l'ecran
 void Screen::Prev(){
     int i;
-    if(not(editing)) {
-
+    
         if(prevx!=-1 && prevy !=-1) {
             myLcd.setCursor(prevx,prevy);
-            myLcd.print(" ");
-        }
+            myLcd.print(" ");      
+        }  
+
+    if(not(editing)) {
 
         if(currentObject==0) currentObject++;
         for(i=currentObject-1;i>=0;i--){
@@ -86,6 +88,8 @@ void Screen::Prev(){
             ((EditableText*)objects[currentObject])->prev();
             
         }
+        prevx=objects[currentObject]->getx()-1;
+        prevy=objects[currentObject]->gety();
     } 
     display(); 
 }
