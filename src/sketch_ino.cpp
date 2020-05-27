@@ -85,12 +85,14 @@ void Board::setup(){
     pinMode(0,OUTPUT);    //basic led
     pinMode(3,OUTPUT);    //intelligent led
     
+    
+    //adding text options to editable texts
     t3s2.addText("OFF");
     t4s2.addText("ENA");
     t3s3.addText("OFF");
     
 
-    //Filling menus
+    //Filling screens
     scr1.addObject(&t2s1);
     scr1.addObject(&v1s1);
     scr1.addObject(&v2s1);
@@ -107,6 +109,7 @@ void Board::setup(){
     scr4.addObject(&v1s4);
     scr4.addObject(&v2s4);
 
+    //adding screens to the main menu
     myMenu.addScreen(&scr2);
     myMenu.addScreen(&scr3);
     myMenu.addScreen(&scr4);
@@ -121,15 +124,14 @@ void Board::loop(){
     currPres=float(analogRead(5))/1000.0;
     
    
-    cout << "test here "<<t3s2.getCurrentText()<<endl;
     if(t3s2.getCurrentText()=="ON"){
-       // cout << "ON"<<endl;
          digitalWrite(0,HIGH);
     } 
     if(t3s2.getCurrentText()=="OFF"){
-        //cout << "OFF"<<endl;
          digitalWrite(0,LOW);
     }
+    
+    //getting input from user
     char enc = getEncoderValue();
     switch(enc){
         case '+':
