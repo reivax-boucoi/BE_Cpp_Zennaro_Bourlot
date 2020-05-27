@@ -127,9 +127,9 @@ void DigitalActuatorLED::run(){
     if(ptrmem!=NULL)
       state=*ptrmem;
     if (state==OFF)
-      cout << "((((eteint))))\n";
+      cout << "(((HEATER OFF)))\n";
     else
-    cout << "((((allume))))\n";
+    cout << "(((HEATER ON)))\n";
     sleep(temps);
     }
 }
@@ -151,9 +151,9 @@ void IntelligentDigitalActuatorLED::run(){
                 else luminosite_environment-=increment;
         }
         if (state==OFF){
-            cout << "(((Heater ON)))\n";
+            cout << "(((IDA ON)))\n";
         }else{
-            cout << "(((HEATER OFF)))\n";
+            cout << "(((IDA OFF)))\n";
         }
         sleep(temps);
     }
