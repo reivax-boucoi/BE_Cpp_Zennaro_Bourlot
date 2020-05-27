@@ -26,13 +26,19 @@ string Screen::getName(){
 //Methode permettant de selectionner le prochain objet editable affiche sur l'ecran
 void Screen::Next(){
     unsigned int i;
-    if(prevx!=-1 && prevy !=-1) {
+   
+        if(prevx!=-1 && prevy !=-1 && prev_obj!=currentObject) {
             myLcd.setCursor(prevx,prevy);
             myLcd.print(" ");      
-        }  
+        } else {
+            myLcd.setCursor(prevx,prevy);
+            myLcd.print(">"); 
+            }  
 
     if(not(editing)) {
-        if(currentObject==nbobjects-1) currentObject--;
+         
+        if(currentObject>=nbobjects-1) currentObject--;
+        prev_obj=currentObject;
         for(i=currentObject+1;i<nbobjects;i++){
             if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                 currentObject=i;
@@ -44,6 +50,7 @@ void Screen::Next(){
                 break;
             }
         }
+            
     } else {
         if(typeid(*objects[currentObject])==typeid(EditableValue)){
             ((EditableValue*)objects[currentObject])->increment();
@@ -51,8 +58,9 @@ void Screen::Next(){
             ((EditableText*)objects[currentObject])->next();
 
         }
-        prevx=objects[currentObject]->getx()-1;
-        prevy=objects[currentObject]->gety();
+        //prev_obj=currentObject;
+        //prevx=objects[currentObject]->getx()-1;
+        //prevy=objects[currentObject]->gety();
     }  
     display();
 }
@@ -61,14 +69,18 @@ void Screen::Next(){
 void Screen::Prev(){
     int i;
     
-        if(prevx!=-1 && prevy !=-1) {
+      if(prevx!=-1 && prevy !=-1 && prev_obj!=currentObject) {
             myLcd.setCursor(prevx,prevy);
             myLcd.print(" ");      
-        }  
+        } else {
+            myLcd.setCursor(prevx,prevy);
+            myLcd.print(">"); 
+            }      
 
     if(not(editing)) {
-
-        if(currentObject==0) currentObject++;
+     
+        if(currentObject<=0) currentObject=1;
+        prev_obj=currentObject;
         for(i=currentObject-1;i>=0;i--){
              if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                  currentObject=i;
@@ -88,8 +100,9 @@ void Screen::Prev(){
             ((EditableText*)objects[currentObject])->prev();
             
         }
-        prevx=objects[currentObject]->getx()-1;
-        prevy=objects[currentObject]->gety();
+       // prev_obj=currentObject;
+        //prevx=objects[currentObject]->getx()-1;
+        //prevy=objects[currentObject]->gety();
     } 
     display(); 
 }
@@ -165,8 +178,9 @@ void Menu::enter(){
 void Menu::back(){ 
     if(screenEntered){
         screens[currentScreen]->back();
-        if(true)screenEntered=false;    //TODO
+        if(not(screens[currentScreen]->getEditing()))screenEntered=false;    //TODO
     }else{
+        //screenEntered=false; 
         currentScreen=0;
         display();
     }
