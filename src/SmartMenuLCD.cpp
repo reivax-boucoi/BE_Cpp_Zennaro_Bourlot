@@ -166,9 +166,11 @@ void Menu::display(){
 //Methode permettant de valider l'affichage de l'ecran selectionne
 void Menu::enter(){ 
     if(screenEntered){
+        tmp=0;
         screens[currentScreen]->enter();
     }else{
         screenEntered=true;
+        tmp=1;
         display();
     }
     
@@ -177,16 +179,19 @@ void Menu::enter(){
 //Methode permettant de retourner au Menu principal ou de sortir d'une zone d'edition 
 void Menu::back(){ 
     if(tmp==0){
+        
         if(screenEntered){
         screens[currentScreen]->back();
-        tmp=1;
+        screenEntered=false; 
         //if(not(screens[currentScreen]->getEditing()))screenEntered=false;    //TODO
         }else{
             currentScreen=0;
             display();
         }
     } else {
-             screenEntered=false; 
+            screenEntered=false;
+            currentScreen=0;
+            display();
             tmp=0;
         }
     
