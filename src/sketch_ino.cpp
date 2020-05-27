@@ -41,7 +41,10 @@ Text           t1s2("Heater:",0,0);
 Text           t2s2("Cooling:",0,1);
 EditableText   t3s2("ON",11,0,3);
 EditableText   t4s2("DIS",11,1,3);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93d73bfdfe83d6fd1936ee1a6d63523efe3318de
 Screen         scr2(&t1s2,"Heating");
 
 /*
@@ -56,7 +59,10 @@ Text           t1s3("Luminosity:",0,0);
 Text           t2s3("Light:",0,1);
 EditableValue  v1s3(&setLum,13,0,3,0,900);
 EditableText   t3s3("ON",9,1,3);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93d73bfdfe83d6fd1936ee1a6d63523efe3318de
 Screen         scr3(&t1s3,"Luminosity");
 
 /*
@@ -120,7 +126,7 @@ void Board::loop(){
     lum=analogRead(2);
     currPres=float(analogRead(5))/1000.0;
     
-    digitalWrite(3,digitalRead(4)); //btn ctrl smartled
+    digitalWrite(3,t3s2.getCurrentText()=="ON");
     char enc = getEncoderValue();
     switch(enc){
         case '+':

@@ -9,7 +9,7 @@ int main(){
   AnalogSensorTemperature temperature(DELAY*20,TEMP);
   AnalogSensorLuminosity luminosite(DELAY*20,luminosite_environment);
   DigitalActuatorLED led1(DELAY*20);
-  IntelligentDigitalActuatorLED led2(DELAY*20,50);
+  IntelligentDigitalActuatorLED led2(DELAY*4,50);
   ExternalDigitalSensorButton btn1(DELAY*20);
   AnalogSensorPressure pressure(DELAY*20,101325);
   I2CActuatorScreen screen;

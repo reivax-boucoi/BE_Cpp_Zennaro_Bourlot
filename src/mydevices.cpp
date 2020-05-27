@@ -151,9 +151,9 @@ void IntelligentDigitalActuatorLED::run(){
                 else luminosite_environment-=increment;
         }
         if (state==OFF){
-            cout << "((((IDALeteint"<<luminosite_environment<<"))))\n";
+            cout << "(((Heater ON)))\n";
         }else{
-            cout << "((((IDALallume"<<luminosite_environment<<"))))\n";
+            cout << "(((HEATER OFF)))\n";
         }
         sleep(temps);
     }
