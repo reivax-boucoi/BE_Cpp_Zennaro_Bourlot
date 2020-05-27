@@ -31,7 +31,7 @@ void Screen::Next(){
         for(i=currentObject+1;i<nbobjects;i++){
             if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                 currentObject=i;
-                myLcd.clear();
+                //myLcd.clear();
                 myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
                 myLcd.print(">");
                 break;
@@ -56,7 +56,7 @@ void Screen::Prev(){
         for(i=currentObject-1;i>=0;i--){
              if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                  currentObject=i;
-                 myLcd.clear();
+                // myLcd.clear();
                  myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
                  myLcd.print(">");
                 // this->display();
@@ -136,8 +136,9 @@ void Menu::enter(){
         screens[currentScreen]->enter();
     }else{
         screenEntered=true;
+        display();
     }
-    display();
+    
 }
 
 //Methode permettant de retourner au Menu principal ou de sortir d'une zone d'edition 
@@ -147,8 +148,8 @@ void Menu::back(){
         if(true)screenEntered=false;    //TODO
     }else{
         currentScreen=0;
+        display();
     }
-    display();
     
 }
 
@@ -161,8 +162,9 @@ void Menu::next(){
         if(currentScreen<nbscreens-1) {
             currentScreen++;
         }
-    }
     display();
+    }
+    
 }
 
 //Methode permettant de positionner le curseur de selection vers l'ecran precedent
@@ -174,8 +176,9 @@ void Menu::prev(){
         if(currentScreen>0) {
             currentScreen--;
         }
+        display();
     }
-    display();
+    
 }
 
 
