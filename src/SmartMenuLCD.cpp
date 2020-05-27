@@ -182,7 +182,8 @@ void Menu::back(){
         
         if(screenEntered){
         screens[currentScreen]->back();
-        screenEntered=false; 
+        tmp=1;
+       // screenEntered=false; 
         //if(not(screens[currentScreen]->getEditing()))screenEntered=false;    //TODO
         }else{
             currentScreen=0;
