@@ -1,6 +1,6 @@
 #include "SmartMenuLCD.h"
 
-LCD mylcd;
+extern LCD myLcd;
 
 /*********** Constructeurs/methodes de la classe Screen *************/
 
@@ -31,9 +31,9 @@ void Screen::Next(){
         for(i=currentObject+1;i<nbobjects;i++){
             if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                 currentObject=i;
-                mylcd.clear();
-                mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
-                mylcd.print(">");
+                myLcd.clear();
+                myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+                myLcd.print(">");
                 break;
             }
         }
@@ -56,9 +56,9 @@ void Screen::Prev(){
         for(i=currentObject-1;i>=0;i--){
              if(typeid(*objects[i])==typeid(EditableValue) || typeid(*objects[i])==typeid(EditableText)){
                  currentObject=i;
-                 mylcd.clear();
-                 mylcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
-                 mylcd.print(">");
+                 myLcd.clear();
+                 myLcd.setCursor(objects[i]->getx()-1,objects[i]->gety());
+                 myLcd.print(">");
                 // this->display();
                  break;
              }
@@ -114,17 +114,17 @@ void Menu::addScreen(Screen *s){
 
 //Methode permettant d'afficher le Menu principale (les noms associes aux ecrans sont affiches)
 void Menu::display(){
-    mylcd.clear();
+    myLcd.clear();
     if(screenEntered){
         screens[currentScreen]->display();
     }else{
         for (unsigned int i=currentScreen;(i<currentScreen+2 && i<nbscreens);i++){
             if(i==currentScreen){
-                mylcd.setCursor(0,i-currentScreen);
-                mylcd.print(">");
+                myLcd.setCursor(0,i-currentScreen);
+                myLcd.print(">");
             }
-            mylcd.setCursor(1,i-currentScreen);
-            mylcd.print(screens[i]->getName());
+            myLcd.setCursor(1,i-currentScreen);
+            myLcd.print(screens[i]->getName());
         }
     }
         

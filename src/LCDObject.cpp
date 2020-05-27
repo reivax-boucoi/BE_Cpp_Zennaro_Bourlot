@@ -1,6 +1,5 @@
 #include "LCDObject.h"
 
-
 LCD myLcd;
 
 ScreenObject::ScreenObject(int x, int y){
