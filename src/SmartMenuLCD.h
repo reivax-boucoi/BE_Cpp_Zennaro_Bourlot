@@ -39,6 +39,7 @@ private:
     unsigned int currentScreen;
     unsigned int nbscreens=0;
     bool screenEntered=false;
+    int tmp=0;
     
 public:
     Menu(Screen *s);

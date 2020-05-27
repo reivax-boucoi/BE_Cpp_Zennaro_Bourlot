@@ -176,14 +176,20 @@ void Menu::enter(){
 
 //Methode permettant de retourner au Menu principal ou de sortir d'une zone d'edition 
 void Menu::back(){ 
-    if(screenEntered){
+    if(tmp==0){
+        if(screenEntered){
         screens[currentScreen]->back();
-        if(not(screens[currentScreen]->getEditing()))screenEntered=false;    //TODO
-    }else{
-        //screenEntered=false; 
-        currentScreen=0;
-        display();
-    }
+        tmp=1;
+        //if(not(screens[currentScreen]->getEditing()))screenEntered=false;    //TODO
+        }else{
+            currentScreen=0;
+            display();
+        }
+    } else {
+             screenEntered=false; 
+            tmp=0;
+        }
+    
     
 }
 
