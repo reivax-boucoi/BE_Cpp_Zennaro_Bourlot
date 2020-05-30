@@ -17,6 +17,3 @@ Le projet est une libraire LCD permettant la gestion de menus et d'écrans, ains
 - `core_simulation` a été étendu pour inclure un périphérique LCD.
 
 > Note : Encoder et LCD on été implémentés directement (sans passer par `mydevices`) afin de contourner les limitations de l'interface arduino, le but du projet n'étant pas le développement de ces interfaces.
-
-
-
