@@ -114,8 +114,6 @@ class AnalogActuator : public Actuator {
 public:
     
     AnalogActuator(int time, int value);
-    
-    void setValue(int data);
 };
 
 //definition de la classe generique pour tous les actionneurs ON/OFF
@@ -128,8 +126,6 @@ class DigitalActuator : public Actuator {
  public:
     
     DigitalActuator(int time);
-
-    void setState(int newstate);
 };
 
 // exemple d'actionneur digital : une led.

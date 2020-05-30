@@ -48,17 +48,23 @@ class Screen{
     - int currentObject
     - static int nbobjects
     - string name
+    - bool editing
+    - int prevx
+    - int prevy
+    - int prev_obj
     + void display(void)
     + addObject(ScreenObject* newObj)
     + void Next(void)
     + void Prev(void)
-
+    + void enter(void)
+    + void back(void)
 }
 
 class Menu{
     - vector<Screen*> screens
     - int currentScreen
     - static int nbscreens
+    - bool screenEntered
     + void display(void)
     + void enter(void)
     + void back(void)
